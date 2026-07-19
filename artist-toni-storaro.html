@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>За нас · Red Donkey</title>
-<meta name="description" content="Red Donkey Backstage Management — български организатор на концерти и живи събития от 2022 г. Кои сме ние, какво правим и защо концертите ни се помнят.">
+<title>Тони Стораро · Red Donkey</title>
+<meta name="description" content="Тони Стораро — попфолк изпълнител в програмата на Red Donkey. Биография и предстоящи концерти.">
 <!-- Маркираме, че JS работи — scroll-reveal стиловете важат САМО тогава -->
 <script>document.documentElement.classList.add('js')</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   RED DONKEY · ВАРИАНТ B — „ХИБРИД" · ПОДСТРАНИЦА: ЗА НАС
+   RED DONKEY · ВАРИАНТ B — „ХИБРИД" · ПОДСТРАНИЦА: АРТИСТ · ТОНИ СТОРАРО
    Изцяло светла страница — нейви само за дребни акценти.
    Остри ъгли навсякъде.
    ============================================================ */
@@ -57,6 +57,7 @@ body{
   color:var(--ink);
   background:var(--warm);
   overflow-x:hidden;
+  padding-top:76px;      /* място за фиксираната навигация */
 }
 img{max-width:100%;height:auto;display:block}
 picture{display:contents}          /* критично: <picture> да не чупи layout-а */
@@ -180,6 +181,8 @@ time{font-variant-numeric:tabular-nums}
 .nav-links a:hover::after{transform:scaleX(1)}
 /* Видим маркер на активната страница */
 .nav-links a[aria-current="page"]::after{transform:scaleX(1)}
+/* Видим маркер на секцията, към която принадлежи страницата */
+.nav-links a.is-section::after{transform:scaleX(1)}
 .nav-cta{margin-left:14px;min-height:44px;padding:10px 24px}
 .nav-cta::after{display:none}
 /* CTA бутонът е бял текст (.nav-links a color:ink иначе го надвива) */
@@ -210,6 +213,7 @@ time{font-variant-numeric:tabular-nums}
 }
 .mobile-menu a:hover{color:var(--brand)}
 .mobile-menu a[aria-current="page"]{color:var(--brand-dk)}
+.mobile-menu a.is-section{color:var(--brand-dk)}
 .mobile-menu .btn{margin-top:28px;width:100%;color:#fff}
 .menu-close{
   position:absolute;top:16px;right:16px;width:48px;height:48px;
@@ -229,64 +233,59 @@ time{font-variant-numeric:tabular-nums}
 }
 .page-sub strong{color:var(--ink);font-weight:600}
 
-/* ============================================================
-   3. Историята — кои сме ние
-   ============================================================ */
-.story{background:var(--warm);padding:66px 0}
-.story-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:56px;align-items:start}
-.story-copy p{color:var(--gray);font-size:17px;margin-bottom:18px;max-width:62ch}
-.story-copy p:last-child{margin-bottom:0}
-.story-copy b{color:var(--ink);font-weight:600}
-
-/* ============================================================
-   4. Какво правим — 3 колони
-   ============================================================ */
-.facts{background:var(--white);padding:66px 0;border-top:1px solid var(--hair)}
-.facts-head{margin-bottom:48px}
-.facts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-.fact{
-  background:var(--warm);border:1px solid var(--hair);
-  padding:32px 28px 34px;
-  box-shadow:var(--shadow-sm);
-  transition:transform .3s var(--ease),box-shadow .3s var(--ease);
-}
-.fact:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
-.fact svg{color:var(--brand);margin-bottom:18px}
-.fact h3{
-  font-family:var(--cond);font-weight:900;text-transform:uppercase;
-  font-size:22px;line-height:1.1;color:var(--ink);margin-bottom:10px;
-}
-.fact p{color:var(--gray);font-size:15px}
-
-/* ============================================================
-   5. Мигове — снимки от наши събития (ледът прелива в топлото)
-   ============================================================ */
-.moments{background:var(--white);padding:66px 0}
-.moments-head{margin-bottom:44px}
-.moments-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-.moment{border:1px solid var(--hair);background:var(--white);box-shadow:var(--shadow-md)}
-.moment-media{overflow:hidden;aspect-ratio:16/10}
-.moment-media img{
-  width:100%;height:100%;object-fit:cover;
-  transition:transform .4s var(--ease);
-}
-.moment:hover .moment-media img{transform:scale(1.04)}
-.moment figcaption{
-  padding:16px 20px;
+/* Профил на артист — портрет + биография */
+.crumbs{background:var(--white);border-bottom:1px solid var(--hair)}
+.crumbs ol{
+  display:flex;align-items:center;flex-wrap:wrap;gap:4px;
   font-family:var(--cond);font-weight:700;text-transform:uppercase;
   letter-spacing:.1em;font-size:13px;color:var(--muted);
+  min-height:52px;padding:4px 0;
 }
-
-/* ============================================================
-   6. CTA лента — „Организираш събитие?"
-   ============================================================ */
-.cta-band{background:var(--white);padding:64px 0}
-.cta-inner{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:32px;flex-wrap:wrap;
+.crumbs a{
+  display:inline-flex;align-items:center;min-height:44px;padding:0 4px;
+  color:var(--gray);transition:color .2s var(--ease);
 }
-.cta-inner .sec-title{font-size:clamp(34px,5vw,58px)}
-.cta-inner p{color:var(--gray);margin-top:12px;max-width:52ch}
+.crumbs a:hover{color:var(--brand)}
+.crumbs li+li::before{content:"/";margin:0 8px;color:var(--hair)}
+.crumbs [aria-current="page"]{color:var(--ink)}
+.ah{padding:44px 0 64px}
+.ah-grid{display:grid;grid-template-columns:minmax(0,400px) 1fr;gap:56px;align-items:start}
+.ah-photo{border:1px solid var(--hair);background:var(--white);overflow:hidden;overflow:clip;aspect-ratio:3/4}
+.ah-photo{position:relative}
+.ah-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center}
+.ah-name{
+  font-family:var(--cond);font-weight:900;text-transform:uppercase;
+  font-size:clamp(40px,6vw,72px);line-height:.98;color:var(--ink);
+}
+.ah-bio{margin-top:22px;color:var(--gray);font-size:17px;line-height:1.7;max-width:62ch}
+.ah-socials{margin-top:26px}
+.ah-cta{margin-top:32px;display:flex;flex-wrap:wrap;gap:14px}
+/* Още артисти */
+.more-artists{padding:0 0 68px}
+.ma-head{margin-bottom:36px}
+.ma-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.ma-card{
+  position:relative;background:var(--white);border:1px solid var(--hair);
+  transition:transform .3s var(--ease),border-color .3s var(--ease);
+}
+.ma-card:hover,.ma-card:focus-within{transform:translateY(-6px);border-color:#D9C2C4}
+.ma-media{overflow:hidden;overflow:clip;aspect-ratio:3/4;background:#E9E4E4}
+.ma-media{position:relative}
+.ma-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;
+  transition:transform .4s var(--ease)}
+.ma-card:hover .ma-media img{transform:scale(1.04)}
+.ma-body{padding:16px 20px 20px}
+.ma-genre{font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:12px;color:var(--brand-dk)}
+.ma-name{font-family:var(--cond);font-weight:900;text-transform:uppercase;font-size:20px;line-height:1.1;color:var(--ink)}
+.ma-open{position:absolute;inset:0;z-index:1}
+.ma-open:focus-visible{outline:2px solid var(--brand);outline-offset:-2px}
+@media(max-width:900px){
+  .ah{padding:36px 0 56px}
+  .ah-grid{grid-template-columns:1fr;gap:32px}
+  .ah-photo{max-width:400px}
+  .ma-grid{grid-template-columns:1fr;gap:18px}
+  .more-artists{padding-bottom:64px}
+}
 
 /* ============================================================
    7. Бял футър
@@ -440,14 +439,14 @@ time{font-variant-numeric:tabular-nums}
     <nav class="nav-links nav-links--left" aria-label="Основна навигация — ляво">
       <a href="index.html">Начало</a>
       <a href="events.html">Събития</a>
-      <a href="artisti.html">Артисти</a>
+      <a href="artisti.html" class="is-section">Артисти</a>
     </nav>
     <a href="index.html" class="nav-logo" aria-label="Red Donkey — начало">
       <img src="assets/logo-dark.svg" alt="Red Donkey" width="67" height="58">
     </a>
     <nav class="nav-links nav-links--right" aria-label="Основна навигация — дясно">
       <a href="lokacii.html">Локации</a>
-      <a href="za-nas.html" aria-current="page">За нас</a>
+      <a href="za-nas.html">За нас</a>
       <a href="kontakti.html">Контакти</a>
       <a href="organize-event.html" class="btn nav-cta">Организирай събитие</a>
     </nav>
@@ -465,111 +464,94 @@ time{font-variant-numeric:tabular-nums}
   <nav aria-label="Мобилна навигация">
     <a href="index.html">Начало</a>
     <a href="events.html">Събития</a>
-    <a href="artisti.html">Артисти</a>
+    <a href="artisti.html" class="is-section">Артисти</a>
     <a href="lokacii.html">Локации</a>
-    <a href="za-nas.html" aria-current="page">За нас</a>
+    <a href="za-nas.html">За нас</a>
     <a href="kontakti.html">Контакти</a>
   </nav>
   <a href="organize-event.html" class="btn">Организирай събитие</a>
 </div>
 
+<!-- Breadcrumb -->
+<div class="crumbs">
+  <div class="wrap">
+    <nav aria-label="Пътечка">
+      <ol>
+        <li><a href="artisti.html" class="is-section">Артисти</a></li>
+        <li><span>Тони Стораро</span></li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
 <main>
 
-<!-- 2. Page-header -->
-<section class="page-header">
+<!-- Профил -->
+<section class="ah">
   <div class="wrap">
-    <span class="sec-kicker">Червеното магаре</span>
-    <h1 class="sec-title">За нас</h1>
-    <p class="page-sub"><strong>Red Donkey Backstage Management</strong> — български организатор на концерти и живи събития от 2022 г.</p>
-  </div>
-</section>
-
-<!-- 3. Историята -->
-<section class="story">
-  <div class="wrap">
-    <div class="story-grid">
-      <div class="rv">
-        <span class="sec-kicker">Кои сме ние</span>
-        <h2 class="sec-title">Правим концертите незабравими</h2>
+    <div class="ah-grid">
+      <div class="ah-photo rv">
+        <picture><source srcset="assets/artists/toni-storaro.webp" type="image/webp"><img src="assets/artists/toni-storaro.jpg" alt="Тони Стораро" width="600" height="900" fetchpriority="high"></picture>
       </div>
-      <div class="story-copy rv">
-        <p>Red Donkey е екипът зад някои от големите концертни вечери в България. От 2022 г. насам организираме концерти и турнета на едни от най-обичаните изпълнители — <b>Тони Стораро, Ку-Ку Бенд и Ивана, Софи Маринова, Фики Стораро, Тони Димитрова</b> — в зали от Арена 8888 София до НДК.</p>
-        <p>Освен големите сцени, <b>Red Donkey Backstage Management</b> поема и частни и корпоративни събития от край до край: сватби, партита и тържества — с кетъринг, техника, сцена и ангажиране на артисти.</p>
-        <p>Билетите за нашите събития се разпространяват чрез билетния ни партньор <b>kupibileti.bg</b>. Ще ни намерите в НДК, вх. А3, гр. София.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 4. Какво правим -->
-<section class="facts">
-  <div class="wrap">
-    <div class="facts-head rv">
-      <span class="sec-kicker">Какво правим</span>
-      <h2 class="sec-title">Три неща, но както трябва</h2>
-    </div>
-    <div class="facts-grid">
-      <div class="fact rv">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18V6l11-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></svg>
-        <h3>Концерти и турнета</h3>
-        <p>Организираме концерти и национални турнета — от афиша и залата до последния бис. В цялата страна, целогодишно.</p>
-      </div>
-      <div class="fact rv">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L3.5 9.2l5.9-.9z"/></svg>
-        <h3>Частни събития</h3>
-        <p>Сватби, корпоративни партита и тържества — Backstage Management екипът поема всичко: кетъринг, техника, сцена, артисти.</p>
-      </div>
-      <div class="fact rv">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 17V7l8-4 8 4v10l-8 4z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg>
-        <h3>От край до край</h3>
-        <p>Едно място за целия процес: планиране, продукция, билети през kupibileti.bg и промоция с медийните ни партньори.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 5. Мигове от наши събития -->
-<section class="moments">
-  <div class="wrap">
-    <div class="moments-head rv">
-      <span class="sec-kicker">На живо</span>
-      <h2 class="sec-title">Мигове от нашите събития</h2>
-    </div>
-    <div class="moments-grid">
-      <figure class="moment rv">
-        <div class="moment-media">
-          <picture>
-            <source srcset="assets/past/mazonakis.webp" type="image/webp">
-            <img src="assets/past/mazonakis.jpg" alt="Йоргос Мазонакис на сцена пред публика" width="1200" height="750" loading="lazy">
-          </picture>
+      <div class="ah-info rv">
+        <span class="sec-kicker">Попфолк · България</span>
+        <h1 class="ah-name">Тони Стораро</h1>
+        <p class="ah-bio">Тони Стораро е легенда на българския попфолк с над 30-годишна кариера. Известен със своите незабравими хитове и емоционални изпълнения, той е сред най-обичаните артисти в България. През 2026 г. отбелязва своя 50-годишен юбилей с грандиозен концерт.</p>
+        <div class="socials ah-socials">
+          <a href="https://www.facebook.com/t.storaro/" aria-label="Facebook (отваря се в нов прозорец)" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.6h2.6l.4-3h-3V8.5c0-.9.3-1.5 1.6-1.5h1.5V4.3c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21h3z"/></svg></a>
+          <a href="https://www.instagram.com/toni_storaro/" aria-label="Instagram (отваря се в нов прозорец)" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="0"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://www.youtube.com/@StoraroMusic" aria-label="YouTube (отваря се в нов прозорец)" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.6 2.6 0 0 0-1.8-1.9C18.2 5 12 5 12 5s-6.2 0-7.8.3A2.6 2.6 0 0 0 2.4 7.2 27 27 0 0 0 2 12a27 27 0 0 0 .4 4.8 2.6 2.6 0 0 0 1.8 1.9c1.6.3 7.8.3 7.8.3s6.2 0 7.8-.3a2.6 2.6 0 0 0 1.8-1.9A27 27 0 0 0 22 12a27 27 0 0 0-.4-4.8zM10 15.2V8.8l5.2 3.2-5.2 3.2z"/></svg></a>
+          <a href="https://open.spotify.com/artist/42APSc9etBGptl3otzihIZ" aria-label="Spotify (отваря се в нов прозорец)" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M7.5 9.7c3.2-.9 6.3-.6 9 .9M8 12.6c2.6-.7 5-.4 7.2.8M8.6 15.3c2-.5 3.8-.3 5.5.6"/></svg></a>
         </div>
-        <figcaption>Йоргос Мазонакис · на сцена</figcaption>
-      </figure>
-      <figure class="moment rv">
-        <div class="moment-media">
-          <picture>
-            <source srcset="assets/past/toni-bday.webp" type="image/webp">
-            <img src="assets/past/toni-bday.jpg" alt="Тони Димитрова на сцена по време на концерт" width="1200" height="750" loading="lazy">
-          </picture>
+        <div class="ah-cta">
+          <a href="event-toni-storaro.html" class="btn">1 предстоящ концерт
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="artisti.html" class="btn btn--ghost-dark">Всички артисти</a>
         </div>
-        <figcaption>Тони Димитрова · концерт</figcaption>
-      </figure>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- 6. CTA лента -->
-<section class="cta-band">
+<!-- Още артисти -->
+<section class="more-artists" aria-label="Още артисти">
   <div class="wrap">
-    <div class="cta-inner rv">
-      <div>
-        <span class="sec-kicker">За бизнеса и частни клиенти</span>
-        <h2 class="sec-title">Организираш събитие?</h2>
-        <p>Разкажи ни какво планираш — ние поемаме техниката, сцената, кетъринга и артистите.</p>
-      </div>
-      <a href="organize-event.html" class="btn">Заяви оферта
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
+    <div class="ma-head rv">
+      <span class="sec-kicker">Открий още</span>
+      <h2 class="sec-title" style="font-size:clamp(30px,4vw,48px)">Още артисти</h2>
+    </div>
+    <div class="ma-grid">
+      <article class="ma-card rv">
+        <div class="ma-media">
+          <picture><source srcset="assets/artists/sofi-marinova.webp" type="image/webp"><img src="assets/artists/sofi-marinova.jpg" alt="Софи Маринова" width="600" height="900" loading="lazy"></picture>
+        </div>
+        <div class="ma-body">
+          <span class="ma-genre">Попфолк</span>
+          <h3 class="ma-name">Софи Маринова</h3>
+        </div>
+        <a class="ma-open" href="artist-sofi-marinova.html"><span class="visually-hidden">Виж профила на Софи Маринова</span></a>
+      </article>
+      <article class="ma-card rv">
+        <div class="ma-media">
+          <picture><source srcset="assets/artists/ivana.webp" type="image/webp"><img src="assets/artists/ivana.jpg" alt="Ивана" width="600" height="900" loading="lazy"></picture>
+        </div>
+        <div class="ma-body">
+          <span class="ma-genre">Попфолк</span>
+          <h3 class="ma-name">Ивана</h3>
+        </div>
+        <a class="ma-open" href="artist-ivana.html"><span class="visually-hidden">Виж профила на Ивана</span></a>
+      </article>
+      <article class="ma-card rv">
+        <div class="ma-media">
+          <picture><source srcset="assets/artists/fiki-storaro.webp" type="image/webp"><img src="assets/artists/fiki-storaro.jpg" alt="Фики Стораро" width="600" height="900" loading="lazy"></picture>
+        </div>
+        <div class="ma-body">
+          <span class="ma-genre">Попфолк</span>
+          <h3 class="ma-name">Фики Стораро</h3>
+        </div>
+        <a class="ma-open" href="artist-fiki-storaro.html"><span class="visually-hidden">Виж профила на Фики Стораро</span></a>
+      </article>
     </div>
   </div>
 </section>

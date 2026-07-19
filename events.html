@@ -28,21 +28,25 @@
   --ink:#16151A;
   --gray:#444444;
   --muted:#5C6975;
-  --brand:#E31E24;
-  --brand-dk:#C4252D;
+  --brand:#153d8a;
+  --brand-dk:#0F2D66;
+  --kupi:#153d8a;         /* купибилетско синьо — плътните бутони */
+  --kupi-dk:#0F2D66;
+  --shadow-blue:0 8px 20px rgba(21,61,138,.24);
+  --shadow-blue-hover:0 12px 26px rgba(21,61,138,.32);
   --warm:#FFFFFF;        /* сайтът е изцяло чисто бял */
   --hair:#F0E2E3;        /* тънки бордюри на картите */
   --cond:'Roboto Condensed', Arial, sans-serif;
   --body:'Inter', Arial, sans-serif;
   --ease:cubic-bezier(.22,1,.36,1);
-  /* Сенки: ЧЕРВЕНИ, в тон с логото — плътна контактна +
-     мека разлята върху чисто бялото. */
-  --shadow-sm:0 1px 2px rgba(196,37,45,.06),0 3px 10px rgba(196,37,45,.08);
-  --shadow-md:0 2px 6px rgba(196,37,45,.08),0 14px 28px rgba(196,37,45,.12);
-  --shadow-lg:0 6px 14px rgba(196,37,45,.09),0 28px 56px rgba(196,37,45,.16);
-  --shadow-hover:0 8px 18px rgba(196,37,45,.11),0 34px 64px rgba(196,37,45,.19);
-  --shadow-red:0 8px 20px rgba(196,37,45,.22);
-  --shadow-red-hover:0 12px 26px rgba(196,37,45,.30);
+  /* Сенки: неутрален слейт — плътна контактна + мека разлята
+     върху чисто бялото (без цвят). */
+  --shadow-sm:0 1px 2px rgba(38,56,72,.06),0 3px 10px rgba(38,56,72,.08);
+  --shadow-md:0 2px 6px rgba(38,56,72,.08),0 14px 28px rgba(38,56,72,.12);
+  --shadow-lg:0 6px 14px rgba(38,56,72,.09),0 28px 56px rgba(38,56,72,.16);
+  --shadow-hover:0 8px 18px rgba(38,56,72,.11),0 34px 64px rgba(38,56,72,.19);
+  --shadow-red:0 8px 20px rgba(38,56,72,.22);
+  --shadow-red-hover:0 12px 26px rgba(38,56,72,.30);
 }
 
 /* ---------- Reset / база ---------- */
@@ -54,7 +58,6 @@ body{
   color:var(--ink);
   background:var(--warm);
   overflow-x:hidden;overflow-x:clip; /* clip не прави body scroll container — иначе view() timeline-ът се закача за body */
-  padding-bottom:26px;   /* място за фиксираната прото-лента в дъното */
 }
 img{max-width:100%;height:auto;display:block}
 picture{display:contents}          /* критично: <picture> да не чупи layout-а */
@@ -65,10 +68,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   outline:2px solid var(--brand);outline-offset:3px;
 }
 
-/* Курсор: червеното магаренце от логото — само магарето, плътно
-   (ново име на файла = никакъв стар кеш). Интерактивните елементи
-   пазят системния pointer/зуум курсор. */
-html{cursor:url("assets/cursor-donkey2.png") 2 6, auto}
 
 
 /* Числата — табулярни */
@@ -100,18 +99,18 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
    Върху бяло (.page-header) остава var(--brand). */
 .poster-list .sec-kicker,.events .sec-kicker,.cta-band .sec-kicker{color:var(--brand-dk)}
 
-/* Бутони — плътно червено, остри ъгли, condensed */
+/* Бутони — купибилетско синьо, остри ъгли, condensed */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:10px;
   min-height:48px;padding:13px 30px;
-  background:var(--brand);color:#fff;
+  background:var(--kupi);color:#fff;
   font-family:var(--cond);font-weight:700;text-transform:uppercase;
   letter-spacing:.08em;font-size:15px;
-  border-radius:0;border:2px solid var(--brand);
-  box-shadow:var(--shadow-red);
+  border-radius:0;border:2px solid var(--kupi);
+  box-shadow:var(--shadow-blue);
   transition:background .25s var(--ease),border-color .25s var(--ease),transform .25s var(--ease),box-shadow .25s var(--ease);
 }
-.btn:hover{background:var(--brand-dk);border-color:var(--brand-dk);transform:translateY(-2px);box-shadow:var(--shadow-red-hover)}
+.btn:hover{background:var(--kupi-dk);border-color:var(--kupi-dk);transform:translateY(-2px);box-shadow:var(--shadow-blue-hover)}
 /* Тъмен ghost бутон върху светъл фон */
 .btn--ghost-dark{
   background:transparent;color:var(--ink);border:2px solid var(--ink);
@@ -120,18 +119,6 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
 .btn--ghost-dark:hover{background:var(--ink);border-color:var(--ink);color:#fff;transform:translateY(-2px);box-shadow:none}
 .btn svg{flex:none}
 
-/* ============================================================
-   0. Тънка прототипна лента — FIXED в дъното, над всичко
-   ============================================================ */
-.proto-bar{
-  position:fixed;left:0;right:0;bottom:0;z-index:100;
-  height:26px;display:flex;align-items:center;justify-content:center;
-  background:#fff;border-top:1px solid var(--hair);color:var(--muted);
-  font-family:var(--cond);font-size:11px;letter-spacing:.2em;
-  text-transform:uppercase;text-align:center;
-  padding:0 12px;
-}
-.proto-bar b{color:var(--brand-dk);font-weight:700;margin-right:4px}
 
 /* ============================================================
    Лоудър: магарето от логото + зареждаща линия. Само под .js
@@ -166,17 +153,17 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
   transition:box-shadow .3s var(--ease);
 }
 .nav.scrolled{
-  box-shadow:0 4px 10px rgba(196,37,45,.06),0 12px 32px rgba(196,37,45,.10);
+  box-shadow:0 4px 10px rgba(38,56,72,.06),0 12px 32px rgba(38,56,72,.10);
 }
 .nav-inner{
   max-width:1240px;margin:0 auto;padding:0 24px;
   display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
-  height:76px;
+  height:76px;transition:height .3s var(--ease);
 }
 /* Логото в средата (по-голямо), линковете прилепени до него; бургерът
    дели дясната клетка с дясната група — никога не са едновременно видими */
 .nav-logo{grid-column:2;grid-row:1;justify-self:center}
-.nav-logo img{height:58px;width:auto}
+.nav-logo img{height:58px;width:auto;transition:height .3s var(--ease)}
 .nav-links{display:flex;align-items:center;gap:6px}
 .nav-links--left{grid-column:1;grid-row:1;justify-self:end;margin-right:18px}
 .nav-links--right{grid-column:3;grid-row:1;justify-self:start;margin-left:18px}
@@ -197,6 +184,11 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
 .nav-links a[aria-current="page"]::after{transform:scaleX(1)}
 .nav-cta{margin-left:14px;min-height:44px;padding:10px 24px}
 .nav-cta::after{display:none}
+/* CTA бутонът е бял текст (.nav-links a color:ink иначе го надвива) */
+.nav-links .nav-cta{color:#fff}
+/* Хедърът се свива при скрол надолу */
+.nav.scrolled .nav-inner{height:60px}
+.nav.scrolled .nav-logo img{height:46px}
 
 /* Бургер (само mobile) */
 .burger{
@@ -231,7 +223,7 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
    ============================================================ */
 .page-header{
   background:var(--white);border-bottom:1px solid var(--hair);
-  padding:150px 0 56px;   /* отгоре: място за фиксираната навигация */
+  padding:116px 0 40px;   /* отгоре: място за фиксираната навигация */
 }
 .page-header .sec-title{font-size:clamp(48px,8.5vw,104px)}
 .page-sub{
@@ -326,7 +318,7 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
 /* ============================================================
    5. Афишна решетка — „С АФИШИТЕ" (както на index)
    ============================================================ */
-.events{background:var(--warm);padding:0 0 110px}
+.events{background:var(--warm);padding:40px 0 84px}
 .events-head{
   display:flex;align-items:flex-end;justify-content:space-between;
   gap:24px;margin-bottom:52px;flex-wrap:wrap;
@@ -394,7 +386,7 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
 /* ============================================================
    6. CTA лента — „Организираш събитие?"
    ============================================================ */
-.cta-band{background:var(--white);padding:88px 0}
+.cta-band{background:var(--white);padding:64px 0}
 .cta-inner{
   display:flex;align-items:center;justify-content:space-between;
   gap:32px;flex-wrap:wrap;
@@ -458,21 +450,7 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
 .marquee-group img.inv{filter:invert(1);opacity:.75}
 @keyframes partnersScroll{to{transform:translateX(-50%)}}
 /* Пауза/пусни за лентата (WCAG 2.2.2) — като бутона на coverflow-а */
-.partners-head{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:26px}
-.partners-head .partners-label{margin-bottom:0}
-.marquee-pause{
-  flex:none;width:36px;height:36px;
-  display:inline-flex;align-items:center;justify-content:center;
-  border:1px solid var(--ink);color:var(--ink);border-radius:0;
-  transition:background .25s var(--ease),color .25s var(--ease);
-}
-.marquee-pause:hover{background:var(--ink);color:#fff}
-.marquee-pause .ic-play{display:none}
-.marquee-pause[aria-pressed="true"] .ic-pause{display:none}
-.marquee-pause[aria-pressed="true"] .ic-play{display:block}
-.marquee.paused .marquee-track{animation-play-state:paused}
-/* Без JS бутонът не прави нищо — крием го */
-html:not(.js) .marquee-pause{display:none}
+/* Партньорската лента се пауза само при hover/фокус (CSS) */
 
 /* ============================================================
    Scroll-reveal — САМО под .js (иначе всичко е видимо)
@@ -507,7 +485,6 @@ html:not(.js) .marquee-pause{display:none}
    ============================================================ */
 @view-transition{navigation:auto}
 .nav{view-transition-name:site-nav}
-.proto-bar{view-transition-name:proto-bar}
 
 /* ============================================================
    Reduced motion — без анимации
@@ -529,7 +506,6 @@ html:not(.js) .marquee-pause{display:none}
   .marquee-group{flex-wrap:wrap;justify-content:center;gap:28px;padding-right:0}
   .marquee-group[aria-hidden]{display:none}
   .marquee{-webkit-mask-image:none;mask-image:none}
-  .marquee-pause{display:none}
 }
 
 /* ============================================================
@@ -544,7 +520,7 @@ html:not(.js) .marquee-pause{display:none}
   .burger{display:flex}
 }
 @media(max-width:820px){
-  .page-header{padding:130px 0 44px}
+  .page-header{padding:104px 0 34px}
   .filters{position:static}      /* на mobile не лепим — пести място */
   /* Плакатният ред се пренарежда вертикално */
   .pl-row{grid-template-columns:1fr;gap:16px;align-items:start;padding:26px 8px}
@@ -587,24 +563,22 @@ html:not(.js) .marquee-pause{display:none}
 })();
 </script>
 
-<!-- 0. Прототипна лента -->
-<div class="proto-bar"><b>ПРОТОТИП</b> · одобрена посока · снимките са реалните от сайта</div>
-
 <!-- 1. Навигация (единна за всички страници) -->
 <header class="nav" id="nav">
   <div class="nav-inner">
     <nav class="nav-links nav-links--left" aria-label="Основна навигация — ляво">
       <a href="index.html">Начало</a>
       <a href="events.html" aria-current="page">Събития</a>
-      <a href="organize-event.html">Организирай събитие</a>
+      <a href="artisti.html">Артисти</a>
     </nav>
     <a href="index.html" class="nav-logo" aria-label="Red Donkey — начало">
       <img src="assets/logo-dark.svg" alt="Red Donkey" width="67" height="58">
     </a>
     <nav class="nav-links nav-links--right" aria-label="Основна навигация — дясно">
+      <a href="lokacii.html">Локации</a>
       <a href="za-nas.html">За нас</a>
-      <a href="#contacts">Контакти</a>
-      <a href="events.html" class="btn nav-cta">Билети</a>
+      <a href="kontakti.html">Контакти</a>
+      <a href="organize-event.html" class="btn nav-cta">Организирай събитие</a>
     </nav>
     <button class="burger" id="burger" aria-label="Отвори менюто" aria-expanded="false" aria-controls="mobileMenu">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
@@ -620,11 +594,12 @@ html:not(.js) .marquee-pause{display:none}
   <nav aria-label="Мобилна навигация">
     <a href="index.html">Начало</a>
     <a href="events.html" aria-current="page">Събития</a>
-    <a href="organize-event.html">Организирай събитие</a>
+    <a href="artisti.html">Артисти</a>
+    <a href="lokacii.html">Локации</a>
     <a href="za-nas.html">За нас</a>
-    <a href="#contacts">Контакти</a>
+    <a href="kontakti.html">Контакти</a>
   </nav>
-  <a href="events.html" class="btn">Билети</a>
+  <a href="organize-event.html" class="btn">Организирай събитие</a>
 </div>
 
 <main>
@@ -634,7 +609,7 @@ html:not(.js) .marquee-pause{display:none}
   <div class="wrap">
     <span class="sec-kicker">Календар</span>
     <h1 class="sec-title">Всички събития</h1>
-    <p class="page-sub"><strong>5 събития</strong> · сезони 2026 – 2027 · цените са примерни (прототип)</p>
+    <p class="page-sub"><strong>5 събития</strong> · сезони 2026 – 2027</p>
   </div>
 </section>
 
@@ -659,103 +634,10 @@ html:not(.js) .marquee-pause{display:none}
   </div>
 </section>
 
-<!-- 4. ПЛАКАТЕН СПИСЪК (хронологично) -->
-<section class="poster-list" aria-label="Списък със събития">
-  <div class="wrap">
-    <div class="pl-rows">
-
-      <!-- 1. Тони Димитрова — турнето минава през 2026 и 2027 -->
-      <article class="pl-row filterable rv" data-genre="pop" data-years="2026 2027">
-        <div>
-          <h2 class="pl-name"><a href="tour-toni-dimitrova.html">Тони Димитрова — Турне 2026</a></h2>
-          <p class="pl-meta">Поп · Пловдив · Бургас · Варна · Русе · София (НДК)</p>
-        </div>
-        <div class="pl-side">
-          <p class="pl-when">
-            <span class="pl-date">Август 2026 – Януари 2027</span>
-            <span class="pl-price">от 25 евро</span>
-          </p>
-          <a href="tour-toni-dimitrova.html" class="btn">Билети<span class="visually-hidden"> — Тони Димитрова, Турне 2026</span></a>
-        </div>
-      </article>
-
-      <!-- 2. Ку-Ку Бенд и Ивана -->
-      <article class="pl-row filterable rv" data-genre="pop" data-years="2026">
-        <div>
-          <h2 class="pl-name"><a href="https://kupibileti.bg" target="_blank" rel="noopener">Ку-Ку Бенд и Ивана: „Шампанско и сълзи“<span class="visually-hidden"> (отваря се в нов раздел)</span></a></h2>
-          <p class="pl-meta">Поп · Арена 8888 София</p>
-        </div>
-        <div class="pl-side">
-          <p class="pl-when">
-            <span class="pl-date">СБ · 17.10.2026</span>
-            <span class="pl-price">от 45 евро</span>
-          </p>
-          <a href="https://kupibileti.bg" target="_blank" rel="noopener" class="btn">Билети<span class="visually-hidden"> — Ку-Ку Бенд и Ивана (отваря се в нов раздел)</span></a>
-        </div>
-      </article>
-
-      <!-- 3. Тони Стораро -->
-      <article class="pl-row filterable rv" data-genre="popfolk" data-years="2026">
-        <div>
-          <h2 class="pl-name"><a href="event-toni-storaro.html">Тони Стораро — Юбилеен концерт</a></h2>
-          <p class="pl-meta">Попфолк · Арена 8888 София</p>
-        </div>
-        <div class="pl-side">
-          <p class="pl-when">
-            <span class="pl-date">ПТ · 13.11.2026</span>
-            <span class="pl-price">от 40 евро</span>
-          </p>
-          <a href="event-toni-storaro.html" class="btn">Билети<span class="visually-hidden"> — Тони Стораро, Юбилеен концерт</span></a>
-        </div>
-      </article>
-
-      <!-- 4. Фики Стораро -->
-      <article class="pl-row filterable rv" data-genre="popfolk" data-years="2027">
-        <div>
-          <h2 class="pl-name"><a href="https://kupibileti.bg" target="_blank" rel="noopener">Фики Стораро — Концерт 2027<span class="visually-hidden"> (отваря се в нов раздел)</span></a></h2>
-          <p class="pl-meta">Попфолк · Арена 8888 София</p>
-        </div>
-        <div class="pl-side">
-          <p class="pl-when">
-            <span class="pl-date">2027 · дата: очаквайте</span>
-            <span class="pl-price">от 35 евро</span>
-          </p>
-          <a href="https://kupibileti.bg" target="_blank" rel="noopener" class="btn">Билети<span class="visually-hidden"> — Фики Стораро (отваря се в нов раздел)</span></a>
-        </div>
-      </article>
-
-      <!-- 5. Софи Маринова -->
-      <article class="pl-row filterable rv" data-genre="popfolk" data-years="2027">
-        <div>
-          <h2 class="pl-name"><a href="https://kupibileti.bg" target="_blank" rel="noopener">Софи Маринова — 30 години на сцена<span class="visually-hidden"> (отваря се в нов раздел)</span></a></h2>
-          <p class="pl-meta">Попфолк · Арена 8888 София</p>
-        </div>
-        <div class="pl-side">
-          <p class="pl-when">
-            <span class="pl-date">НД · 05.12.2027</span>
-            <span class="pl-price">от 30 евро</span>
-          </p>
-          <a href="https://kupibileti.bg" target="_blank" rel="noopener" class="btn">Билети<span class="visually-hidden"> — Софи Маринова (отваря се в нов раздел)</span></a>
-        </div>
-      </article>
-
-      <!-- Съобщение при 0 резултата -->
-      <p class="filter-empty" id="listEmpty" role="status">Няма събития по този филтър.</p>
-
-    </div>
-  </div>
-</section>
 
 <!-- 5. Афишна решетка -->
 <section class="events" aria-label="Събития с афишите">
   <div class="wrap">
-    <div class="events-head rv">
-      <div>
-        <span class="sec-kicker">Същите събития, визуално</span>
-        <h2 class="sec-title">С афишите</h2>
-      </div>
-    </div>
-
     <div class="events-grid" id="evGrid">
 
       <article class="ev-card filterable rv" data-genre="pop" data-years="2026 2027">
@@ -892,6 +774,8 @@ html:not(.js) .marquee-pause{display:none}
         <ul>
           <li><a href="index.html">Начало</a></li>
           <li><a href="events.html">Всички събития</a></li>
+          <li><a href="artisti.html">Артисти</a></li>
+          <li><a href="lokacii.html">Локации</a></li>
           <li><a href="organize-event.html">Организирай събитие</a></li>
         </ul>
       </div>
@@ -899,6 +783,7 @@ html:not(.js) .marquee-pause{display:none}
         <h3>Информация</h3>
         <ul>
           <li><a href="za-nas.html">За нас</a></li>
+          <li><a href="kontakti.html">Контакти</a></li>
           <li><a href="https://kupibileti.bg" target="_blank" rel="noopener">Билети: kupibileti.bg<span class="visually-hidden"> (отваря се в нов прозорец)</span></a></li>
         </ul>
       </div>
@@ -922,13 +807,7 @@ html:not(.js) .marquee-pause{display:none}
       </div>
     </div>
     <div class="footer-partners">
-      <div class="partners-head">
-        <p class="partners-label">Партньори и медии</p>
-        <button class="marquee-pause" id="marqueePause" aria-label="Спри въртенето на партньорските лога" aria-pressed="false">
-          <svg class="ic-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4h4v16H7zM13 4h4v16h-4z"/></svg>
-          <svg class="ic-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>
-        </button>
-      </div>
+      <p class="partners-label">Партньори и медии</p>
       <div class="marquee">
         <div class="marquee-track">
           <div class="marquee-group">
@@ -1016,31 +895,22 @@ html:not(.js) .marquee-pause{display:none}
   var genreChips = Array.prototype.slice.call(document.querySelectorAll('.chip[data-genre]'));
   var yearChips  = Array.prototype.slice.call(document.querySelectorAll('.chip[data-year]'));
   var items = Array.prototype.slice.call(document.querySelectorAll('.filterable'));
-  var listEmpty = document.getElementById('listEmpty');
   var gridEmpty = document.getElementById('gridEmpty');
   var filterStatus = document.getElementById('filterStatus');
   var genre = 'all', year = 'all';
 
   function applyFilters(){
-    var listVisible = 0, gridVisible = 0;
+    var visible = 0;
     items.forEach(function(el){
       var okGenre = (genre === 'all') || (el.getAttribute('data-genre') === genre);
       var okYear  = (year === 'all') || (el.getAttribute('data-years').split(' ').indexOf(year) !== -1);
       var show = okGenre && okYear;
       el.classList.toggle('is-filtered-out', !show);
-      if(show){
-        // Гарантираме видимост: reveal класът да не крие показани от филтъра елементи
-        el.classList.add('in');
-        if(el.classList.contains('pl-row')){ listVisible++; } else { gridVisible++; }
-      }
+      if(show){ el.classList.add('in'); visible++; }
     });
-    listEmpty.classList.toggle('show', listVisible === 0);
-    gridEmpty.classList.toggle('show', gridVisible === 0);
-    // Обявяваме резултата за екранни четци (aria-live="polite")
+    if(gridEmpty) gridEmpty.classList.toggle('show', visible === 0);
     if(filterStatus){
-      filterStatus.textContent = (listVisible === 1)
-        ? 'Показано 1 събитие'
-        : 'Показани ' + listVisible + ' събития';
+      filterStatus.textContent = (visible === 1) ? 'Показано 1 събитие' : 'Показани ' + visible + ' събития';
     }
   }
 
@@ -1095,16 +965,6 @@ html:not(.js) .marquee-pause{display:none}
     if(!document.querySelector('.rv.in')) showAll();
   }, 2000);
 
-  /* ---------- Пауза на партньорската лента (WCAG 2.2.2) ---------- */
-  var mqBtn = document.getElementById('marqueePause');
-  if(mqBtn){
-    var mq = document.querySelector('.marquee');
-    mqBtn.addEventListener('click', function(){
-      var mqPaused = mq.classList.toggle('paused');
-      mqBtn.setAttribute('aria-pressed', mqPaused ? 'true' : 'false');
-      mqBtn.setAttribute('aria-label', mqPaused ? 'Пусни въртенето на партньорските лога' : 'Спри въртенето на партньорските лога');
-    });
-  }
 })();
 </script>
 </body>

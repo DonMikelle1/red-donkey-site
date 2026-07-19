@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>За нас · Red Donkey</title>
-<meta name="description" content="Red Donkey Backstage Management — български организатор на концерти и живи събития от 2022 г. Кои сме ние, какво правим и защо концертите ни се помнят.">
+<title>Локации · Red Donkey</title>
+<meta name="description" content="Локациите на Red Donkey — Арена 8888 София, НДК Зала 1, летните театри във Варна, Бургас, Русе и Античния театър в Пловдив.">
 <!-- Маркираме, че JS работи — scroll-reveal стиловете важат САМО тогава -->
 <script>document.documentElement.classList.add('js')</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   RED DONKEY · ВАРИАНТ B — „ХИБРИД" · ПОДСТРАНИЦА: ЗА НАС
+   RED DONKEY · ВАРИАНТ B — „ХИБРИД" · ПОДСТРАНИЦА: ЛОКАЦИИ
    Изцяло светла страница — нейви само за дребни акценти.
    Остри ъгли навсякъде.
    ============================================================ */
@@ -95,7 +95,7 @@ time{font-variant-numeric:tabular-nums}
 }
 .sec-kicker::before{content:"";width:34px;height:2px;background:var(--brand)}
 /* Дребен акцент върху бяло — по-тъмно синьо за контраст */
-.story .sec-kicker,.moments .sec-kicker,.cta-band .sec-kicker{color:var(--brand-dk)}
+.cta-band .sec-kicker{color:var(--brand-dk)}
 
 /* Бутони — купибилетско синьо, остри ъгли, condensed */
 .btn{
@@ -229,58 +229,85 @@ time{font-variant-numeric:tabular-nums}
 }
 .page-sub strong{color:var(--ink);font-weight:600}
 
-/* ============================================================
-   3. Историята — кои сме ние
-   ============================================================ */
-.story{background:var(--warm);padding:66px 0}
-.story-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:56px;align-items:start}
-.story-copy p{color:var(--gray);font-size:17px;margin-bottom:18px;max-width:62ch}
-.story-copy p:last-child{margin-bottom:0}
-.story-copy b{color:var(--ink);font-weight:600}
-
-/* ============================================================
-   4. Какво правим — 3 колони
-   ============================================================ */
-.facts{background:var(--white);padding:66px 0;border-top:1px solid var(--hair)}
-.facts-head{margin-bottom:48px}
-.facts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-.fact{
-  background:var(--warm);border:1px solid var(--hair);
-  padding:32px 28px 34px;
+/* Филтри — чипове (като на страница Събития) */
+.filters{padding:26px 0 6px}
+.filters-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 28px}
+.filter-group{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.chip{
+  min-height:44px;padding:9px 20px;
+  font-family:var(--cond);font-weight:700;text-transform:uppercase;
+  letter-spacing:.08em;font-size:14px;color:var(--ink);
+  background:transparent;border:1px solid #D9C2C4;border-radius:0;
+  transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease),box-shadow .2s var(--ease);
+}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed="true"]{
+  background:var(--navy);border-color:var(--navy);color:#fff;
   box-shadow:var(--shadow-sm);
+}
+.is-filtered-out{display:none!important}
+.filter-empty{
+  display:none;padding:44px 4px;
+  font-family:var(--cond);font-weight:700;text-transform:uppercase;
+  letter-spacing:.1em;font-size:18px;color:var(--muted);
+}
+.filter-empty.show{display:block}
+
+/* Локациите — снимкови карти (собствени снимки на клиента от reddonkey.bg) */
+.vn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;padding:28px 0 72px}
+.vn-card{
+  background:var(--white);border:1px solid var(--hair);
+  display:flex;flex-direction:column;
+  box-shadow:var(--shadow-md);
   transition:transform .3s var(--ease),box-shadow .3s var(--ease);
 }
-.fact:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
-.fact svg{color:var(--brand);margin-bottom:18px}
-.fact h3{
+.vn-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-hover)}
+.vn-media{overflow:hidden;overflow:clip;aspect-ratio:16/10;position:relative}
+.vn-media img{width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease)}
+.vn-card:hover .vn-media img{transform:scale(1.04)}
+/* Отблясък при hover — езикът на ев. картите */
+.vn-media::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(115deg,
+    transparent 42%,rgba(255,255,255,.32) 50%,transparent 58%) no-repeat;
+  background-size:260% 100%;background-position:100% 0;
+  transition:background-position .8s var(--ease);
+}
+.vn-card:hover .vn-media::after{background-position:0 0}
+.vn-type{
+  position:absolute;top:0;left:0;z-index:2;
+  background:var(--navy);color:#fff;
+  font-family:var(--cond);font-weight:700;text-transform:uppercase;
+  letter-spacing:.14em;font-size:11px;padding:6px 11px;
+}
+.vn-body{padding:20px 22px 24px;display:flex;flex-direction:column;flex:1}
+.vn-name{
   font-family:var(--cond);font-weight:900;text-transform:uppercase;
-  font-size:22px;line-height:1.1;color:var(--ink);margin-bottom:10px;
+  font-size:22px;line-height:1.1;color:var(--ink);
 }
-.fact p{color:var(--gray);font-size:15px}
-
-/* ============================================================
-   5. Мигове — снимки от наши събития (ледът прелива в топлото)
-   ============================================================ */
-.moments{background:var(--white);padding:66px 0}
-.moments-head{margin-bottom:44px}
-.moments-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-.moment{border:1px solid var(--hair);background:var(--white);box-shadow:var(--shadow-md)}
-.moment-media{overflow:hidden;aspect-ratio:16/10}
-.moment-media img{
-  width:100%;height:100%;object-fit:cover;
-  transition:transform .4s var(--ease);
-}
-.moment:hover .moment-media img{transform:scale(1.04)}
-.moment figcaption{
-  padding:16px 20px;
+.vn-meta{
+  margin-top:6px;
   font-family:var(--cond);font-weight:700;text-transform:uppercase;
   letter-spacing:.1em;font-size:13px;color:var(--muted);
+  font-variant-numeric:tabular-nums;
 }
-
-/* ============================================================
-   6. CTA лента — „Организираш събитие?"
-   ============================================================ */
-.cta-band{background:var(--white);padding:64px 0}
+.vn-foot{
+  margin-top:auto;padding-top:18px;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+}
+.vn-link{
+  display:inline-flex;align-items:center;gap:6px;min-height:36px;
+  font-size:14px;color:var(--muted);transition:color .2s var(--ease);
+}
+.vn-link:hover{color:var(--brand)}
+.vn-link--map{
+  font-family:var(--cond);font-weight:700;text-transform:uppercase;
+  letter-spacing:.1em;font-size:13px;color:var(--brand-dk);
+}
+@media(max-width:1024px){.vn-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.vn-grid{grid-template-columns:1fr;gap:18px;padding-bottom:64px}}
+/* CTA лента — „Организираш събитие?" */
+.cta-band{background:var(--white);padding:64px 0;border-top:1px solid var(--hair)}
 .cta-inner{
   display:flex;align-items:center;justify-content:space-between;
   gap:32px;flex-wrap:wrap;
@@ -446,8 +473,8 @@ time{font-variant-numeric:tabular-nums}
       <img src="assets/logo-dark.svg" alt="Red Donkey" width="67" height="58">
     </a>
     <nav class="nav-links nav-links--right" aria-label="Основна навигация — дясно">
-      <a href="lokacii.html">Локации</a>
-      <a href="za-nas.html" aria-current="page">За нас</a>
+      <a href="lokacii.html" aria-current="page">Локации</a>
+      <a href="za-nas.html">За нас</a>
       <a href="kontakti.html">Контакти</a>
       <a href="organize-event.html" class="btn nav-cta">Организирай събитие</a>
     </nav>
@@ -466,8 +493,8 @@ time{font-variant-numeric:tabular-nums}
     <a href="index.html">Начало</a>
     <a href="events.html">Събития</a>
     <a href="artisti.html">Артисти</a>
-    <a href="lokacii.html">Локации</a>
-    <a href="za-nas.html" aria-current="page">За нас</a>
+    <a href="lokacii.html" aria-current="page">Локации</a>
+    <a href="za-nas.html">За нас</a>
     <a href="kontakti.html">Контакти</a>
   </nav>
   <a href="organize-event.html" class="btn">Организирай събитие</a>
@@ -478,87 +505,133 @@ time{font-variant-numeric:tabular-nums}
 <!-- 2. Page-header -->
 <section class="page-header">
   <div class="wrap">
-    <span class="sec-kicker">Червеното магаре</span>
-    <h1 class="sec-title">За нас</h1>
-    <p class="page-sub"><strong>Red Donkey Backstage Management</strong> — български организатор на концерти и живи събития от 2022 г.</p>
+    <span class="sec-kicker">Където музиката оживява</span>
+    <h1 class="sec-title">Локации</h1>
+    <p class="page-sub">От арени до летни театри — местата, където музиката оживява.</p>
   </div>
 </section>
 
-<!-- 3. Историята -->
-<section class="story">
+<!-- 3. Филтри -->
+<section class="filters" aria-label="Филтър по тип">
   <div class="wrap">
-    <div class="story-grid">
-      <div class="rv">
-        <span class="sec-kicker">Кои сме ние</span>
-        <h2 class="sec-title">Правим концертите незабравими</h2>
-      </div>
-      <div class="story-copy rv">
-        <p>Red Donkey е екипът зад някои от големите концертни вечери в България. От 2022 г. насам организираме концерти и турнета на едни от най-обичаните изпълнители — <b>Тони Стораро, Ку-Ку Бенд и Ивана, Софи Маринова, Фики Стораро, Тони Димитрова</b> — в зали от Арена 8888 София до НДК.</p>
-        <p>Освен големите сцени, <b>Red Donkey Backstage Management</b> поема и частни и корпоративни събития от край до край: сватби, партита и тържества — с кетъринг, техника, сцена и ангажиране на артисти.</p>
-        <p>Билетите за нашите събития се разпространяват чрез билетния ни партньор <b>kupibileti.bg</b>. Ще ни намерите в НДК, вх. А3, гр. София.</p>
+    <div class="filters-row">
+      <div class="filter-group" role="group" aria-label="Тип локация">
+        <button class="chip" data-f="all" aria-pressed="true">Всички</button>
+        <button class="chip" data-f="arena" aria-pressed="false">Арени</button>
+        <button class="chip" data-f="hall" aria-pressed="false">Зали</button>
+        <button class="chip" data-f="open" aria-pressed="false">На открито</button>
       </div>
     </div>
+    <p id="filterStatus" class="visually-hidden" aria-live="polite"></p>
   </div>
 </section>
 
-<!-- 4. Какво правим -->
-<section class="facts">
+<!-- 4. Решетка с локациите -->
+<section aria-label="Всички локации">
   <div class="wrap">
-    <div class="facts-head rv">
-      <span class="sec-kicker">Какво правим</span>
-      <h2 class="sec-title">Три неща, но както трябва</h2>
-    </div>
-    <div class="facts-grid">
-      <div class="fact rv">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18V6l11-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></svg>
-        <h3>Концерти и турнета</h3>
-        <p>Организираме концерти и национални турнета — от афиша и залата до последния бис. В цялата страна, целогодишно.</p>
-      </div>
-      <div class="fact rv">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L3.5 9.2l5.9-.9z"/></svg>
-        <h3>Частни събития</h3>
-        <p>Сватби, корпоративни партита и тържества — Backstage Management екипът поема всичко: кетъринг, техника, сцена, артисти.</p>
-      </div>
-      <div class="fact rv">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 17V7l8-4 8 4v10l-8 4z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg>
-        <h3>От край до край</h3>
-        <p>Едно място за целия процес: планиране, продукция, билети през kupibileti.bg и промоция с медийните ни партньори.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 5. Мигове от наши събития -->
-<section class="moments">
-  <div class="wrap">
-    <div class="moments-head rv">
-      <span class="sec-kicker">На живо</span>
-      <h2 class="sec-title">Мигове от нашите събития</h2>
-    </div>
-    <div class="moments-grid">
-      <figure class="moment rv">
-        <div class="moment-media">
-          <picture>
-            <source srcset="assets/past/mazonakis.webp" type="image/webp">
-            <img src="assets/past/mazonakis.jpg" alt="Йоргос Мазонакис на сцена пред публика" width="1200" height="750" loading="lazy">
-          </picture>
+    <div class="vn-grid">
+      <article class="vn-card filterable rv" data-f="arena">
+        <div class="vn-media">
+          <picture><source srcset="assets/venues/arena-8888.webp" type="image/webp"><img src="assets/venues/arena-8888.jpg" alt="Арена 8888 София" width="900" height="563" loading="lazy"></picture>
+          <span class="vn-type">Арена</span>
         </div>
-        <figcaption>Йоргос Мазонакис · на сцена</figcaption>
-      </figure>
-      <figure class="moment rv">
-        <div class="moment-media">
-          <picture>
-            <source srcset="assets/past/toni-bday.webp" type="image/webp">
-            <img src="assets/past/toni-bday.jpg" alt="Тони Димитрова на сцена по време на концерт" width="1200" height="750" loading="lazy">
-          </picture>
+        <div class="vn-body">
+          <h3 class="vn-name">Арена 8888 София</h3>
+          <p class="vn-meta">София · 15 000 места</p>
+          <div class="vn-foot">
+            <a class="vn-link" href="events.html">1 предстоящ концерт</a>
+            <a class="vn-link vn-link--map" href="https://maps.google.com/?q=Арена+8888+София" target="_blank" rel="noopener">Виж на картата<span class="visually-hidden"> (отваря се в нов прозорец)</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
         </div>
-        <figcaption>Тони Димитрова · концерт</figcaption>
-      </figure>
+      </article>
+      <article class="vn-card filterable rv" data-f="hall">
+        <div class="vn-media">
+          <picture><source srcset="assets/venues/ndk-zala-1.webp" type="image/webp"><img src="assets/venues/ndk-zala-1.jpg" alt="НДК, Зала 1" width="900" height="563" loading="lazy"></picture>
+          <span class="vn-type">Зала</span>
+        </div>
+        <div class="vn-body">
+          <h3 class="vn-name">НДК, Зала 1</h3>
+          <p class="vn-meta">София · 3 380 места</p>
+          <div class="vn-foot">
+            <a class="vn-link" href="tour-toni-dimitrova.html">1 предстоящ концерт</a>
+            <a class="vn-link vn-link--map" href="https://maps.google.com/?q=НДК+София" target="_blank" rel="noopener">Виж на картата<span class="visually-hidden"> (отваря се в нов прозорец)</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+      <article class="vn-card filterable rv" data-f="open">
+        <div class="vn-media">
+          <picture><source srcset="assets/venues/antichen-teatar-plovdiv.webp" type="image/webp"><img src="assets/venues/antichen-teatar-plovdiv.jpg" alt="Античен Театър Пловдив" width="900" height="563" loading="lazy"></picture>
+          <span class="vn-type">На открито</span>
+        </div>
+        <div class="vn-body">
+          <h3 class="vn-name">Античен Театър Пловдив</h3>
+          <p class="vn-meta">Пловдив · 3 500 места</p>
+          <div class="vn-foot">
+            <a class="vn-link" href="tour-toni-dimitrova.html">1 предстоящ концерт</a>
+            <a class="vn-link vn-link--map" href="https://maps.google.com/?q=Античен+театър+Пловдив" target="_blank" rel="noopener">Виж на картата<span class="visually-hidden"> (отваря се в нов прозорец)</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+      <article class="vn-card filterable rv" data-f="open">
+        <div class="vn-media">
+          <picture><source srcset="assets/venues/leten-teatar-varna.webp" type="image/webp"><img src="assets/venues/leten-teatar-varna.jpg" alt="Летен театър Варна" width="900" height="563" loading="lazy"></picture>
+          <span class="vn-type">На открито</span>
+        </div>
+        <div class="vn-body">
+          <h3 class="vn-name">Летен театър Варна</h3>
+          <p class="vn-meta">Варна · 2 341 места</p>
+          <div class="vn-foot">
+            <a class="vn-link" href="tour-toni-dimitrova.html">1 предстоящ концерт</a>
+            <a class="vn-link vn-link--map" href="https://maps.google.com/?q=Летен+театър+Варна" target="_blank" rel="noopener">Виж на картата<span class="visually-hidden"> (отваря се в нов прозорец)</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+      <article class="vn-card filterable rv" data-f="open">
+        <div class="vn-media">
+          <picture><source srcset="assets/venues/leten-teatar-burgas.webp" type="image/webp"><img src="assets/venues/leten-teatar-burgas.jpg" alt="Летен театър Бургас" width="900" height="563" loading="lazy"></picture>
+          <span class="vn-type">На открито</span>
+        </div>
+        <div class="vn-body">
+          <h3 class="vn-name">Летен театър Бургас</h3>
+          <p class="vn-meta">Бургас · 2 150 места</p>
+          <div class="vn-foot">
+            <a class="vn-link" href="tour-toni-dimitrova.html">1 предстоящ концерт</a>
+            <a class="vn-link vn-link--map" href="https://maps.google.com/?q=Летен+театър+Бургас" target="_blank" rel="noopener">Виж на картата<span class="visually-hidden"> (отваря се в нов прозорец)</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+      <article class="vn-card filterable rv" data-f="open">
+        <div class="vn-media">
+          <picture><source srcset="assets/venues/leten-teatar-ruse.webp" type="image/webp"><img src="assets/venues/leten-teatar-ruse.jpg" alt="Летен театър Русе" width="900" height="563" loading="lazy"></picture>
+          <span class="vn-type">На открито</span>
+        </div>
+        <div class="vn-body">
+          <h3 class="vn-name">Летен театър Русе</h3>
+          <p class="vn-meta">Русе · 1 263 места</p>
+          <div class="vn-foot">
+            <a class="vn-link" href="tour-toni-dimitrova.html">1 предстоящ концерт</a>
+            <a class="vn-link vn-link--map" href="https://maps.google.com/?q=Летен+театър+Русе" target="_blank" rel="noopener">Виж на картата<span class="visually-hidden"> (отваря се в нов прозорец)</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
     </div>
+    <p class="filter-empty" id="filterEmpty" role="status">Няма локации по този филтър.</p>
   </div>
 </section>
 
-<!-- 6. CTA лента -->
+<!-- CTA лента -->
 <section class="cta-band">
   <div class="wrap">
     <div class="cta-inner rv">
@@ -730,6 +803,27 @@ time{font-variant-numeric:tabular-nums}
   setTimeout(function(){
     if(!document.querySelector('.rv.in')) showAll();
   }, 2000);
+
+
+  /* ---------- Филтър по чип (радио модел) ---------- */
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip[data-f]'));
+  var items = Array.prototype.slice.call(document.querySelectorAll('.filterable'));
+  var emptyMsg = document.getElementById('filterEmpty');
+  var fStatus = document.getElementById('filterStatus');
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      var val = chip.getAttribute('data-f');
+      chips.forEach(function(c){ c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'); });
+      var visible = 0;
+      items.forEach(function(el){
+        var show = (val === 'all') || (el.getAttribute('data-f') === val);
+        el.classList.toggle('is-filtered-out', !show);
+        if(show){ el.classList.add('in'); visible++; }
+      });
+      if(emptyMsg) emptyMsg.classList.toggle('show', visible === 0);
+      if(fStatus) fStatus.textContent = (visible === 1) ? 'Показан 1 резултат' : 'Показани ' + visible + ' резултата';
+    });
+  });
 
 })();
 </script>

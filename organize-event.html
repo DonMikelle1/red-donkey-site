@@ -27,22 +27,26 @@
   --ink:#16151A;
   --gray:#444444;
   --muted:#5C6975;
-  --brand:#E31E24;
-  --brand-dk:#C4252D;
+  --brand:#153d8a;
+  --brand-dk:#0F2D66;
+  --kupi:#153d8a;         /* купибилетско синьо — плътните бутони */
+  --kupi-dk:#0F2D66;
+  --shadow-blue:0 8px 20px rgba(21,61,138,.24);
+  --shadow-blue-hover:0 12px 26px rgba(21,61,138,.32);
   --warm:#FFFFFF;        /* сайтът е изцяло чисто бял */
   --hair:#F0E2E3;        /* тънки бордюри на картите */
   --cond:'Roboto Condensed', Arial, sans-serif;
   --body:'Inter', Arial, sans-serif;
   --ease:cubic-bezier(.22,1,.36,1);
 
-  /* Сенки: ЧЕРВЕНИ, в тон с логото — плътна контактна +
-     мека разлята върху чисто бялото. */
-  --shadow-sm:0 1px 2px rgba(196,37,45,.06),0 3px 10px rgba(196,37,45,.08);
-  --shadow-md:0 2px 6px rgba(196,37,45,.08),0 14px 28px rgba(196,37,45,.12);
-  --shadow-lg:0 6px 14px rgba(196,37,45,.09),0 28px 56px rgba(196,37,45,.16);
-  --shadow-hover:0 8px 18px rgba(196,37,45,.11),0 34px 64px rgba(196,37,45,.19);
-  --shadow-red:0 8px 20px rgba(196,37,45,.22);
-  --shadow-red-hover:0 12px 26px rgba(196,37,45,.30);
+  /* Сенки: неутрален слейт — плътна контактна + мека разлята
+     върху чисто бялото (без цвят). */
+  --shadow-sm:0 1px 2px rgba(38,56,72,.06),0 3px 10px rgba(38,56,72,.08);
+  --shadow-md:0 2px 6px rgba(38,56,72,.08),0 14px 28px rgba(38,56,72,.12);
+  --shadow-lg:0 6px 14px rgba(38,56,72,.09),0 28px 56px rgba(38,56,72,.16);
+  --shadow-hover:0 8px 18px rgba(38,56,72,.11),0 34px 64px rgba(38,56,72,.19);
+  --shadow-red:0 8px 20px rgba(38,56,72,.22);
+  --shadow-red-hover:0 12px 26px rgba(38,56,72,.30);
 }
 
 /* ---------- Reset / база ---------- */
@@ -54,7 +58,6 @@ body{
   color:var(--ink);
   background:var(--warm);
   overflow-x:hidden;
-  padding-bottom:26px;   /* място за фиксираната прото-лента в дъното */
 }
 img{max-width:100%;height:auto;display:block}
 picture{display:contents}          /* критично: <picture> да не чупи layout-а */
@@ -65,10 +68,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   outline:2px solid var(--brand);outline-offset:3px;
 }
 
-/* Курсор: червеното магаренце от логото — само магарето, плътно
-   (ново име на файла = никакъв стар кеш). Интерактивните елементи
-   пазят системния pointer/зуум курсор. */
-html{cursor:url("assets/cursor-donkey2.png") 2 6, auto}
 
 
 /* Числата — табулярни */
@@ -99,36 +98,24 @@ time,.step-num{font-variant-numeric:tabular-nums}
 /* Дребен червен текст върху светлите фонове (--warm/--light) — по-тъмно червено за контраст */
 .services .sec-kicker,.inquiry .sec-kicker{color:var(--brand-dk)}
 
-/* Бутони — плътно червено, остри ъгли, condensed */
+/* Бутони — купибилетско синьо, остри ъгли, condensed */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:10px;
   min-height:48px;padding:13px 30px;
-  background:var(--brand);color:#fff;
+  background:var(--kupi);color:#fff;
   font-family:var(--cond);font-weight:700;text-transform:uppercase;
   letter-spacing:.08em;font-size:15px;
-  border-radius:0;border:2px solid var(--brand);
-  box-shadow:var(--shadow-red);
+  border-radius:0;border:2px solid var(--kupi);
+  box-shadow:var(--shadow-blue);
   transition:background .25s var(--ease),border-color .25s var(--ease),
              transform .25s var(--ease),box-shadow .25s var(--ease);
 }
 .btn:hover{
-  background:var(--brand-dk);border-color:var(--brand-dk);
-  transform:translateY(-2px);box-shadow:var(--shadow-red-hover);
+  background:var(--kupi-dk);border-color:var(--kupi-dk);
+  transform:translateY(-2px);box-shadow:var(--shadow-blue-hover);
 }
 .btn svg{flex:none}
 
-/* ============================================================
-   0. Тънка прототипна лента — FIXED в дъното, над всичко
-   ============================================================ */
-.proto-bar{
-  position:fixed;left:0;right:0;bottom:0;z-index:100;
-  height:26px;display:flex;align-items:center;justify-content:center;
-  background:#fff;border-top:1px solid var(--hair);color:var(--muted);
-  font-family:var(--cond);font-size:11px;letter-spacing:.2em;
-  text-transform:uppercase;text-align:center;
-  padding:0 12px;
-}
-.proto-bar b{color:var(--brand-dk);font-weight:700;margin-right:4px}
 
 /* ============================================================
    Лоудър: магарето от логото + зареждаща линия. Само под .js
@@ -163,17 +150,17 @@ time,.step-num{font-variant-numeric:tabular-nums}
   transition:box-shadow .3s var(--ease);
 }
 .nav.scrolled{
-  box-shadow:0 4px 10px rgba(196,37,45,.06),0 12px 32px rgba(196,37,45,.10);
+  box-shadow:0 4px 10px rgba(38,56,72,.06),0 12px 32px rgba(38,56,72,.10);
 }
 .nav-inner{
   max-width:1240px;margin:0 auto;padding:0 24px;
   display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
-  height:76px;
+  height:76px;transition:height .3s var(--ease);
 }
 /* Логото в средата (по-голямо), линковете прилепени до него; бургерът
    дели дясната клетка с дясната група — никога не са едновременно видими */
 .nav-logo{grid-column:2;grid-row:1;justify-self:center}
-.nav-logo img{height:58px;width:auto}
+.nav-logo img{height:58px;width:auto;transition:height .3s var(--ease)}
 .nav-links{display:flex;align-items:center;gap:6px}
 .nav-links--left{grid-column:1;grid-row:1;justify-self:end;margin-right:18px}
 .nav-links--right{grid-column:3;grid-row:1;justify-self:start;margin-left:18px}
@@ -194,6 +181,11 @@ time,.step-num{font-variant-numeric:tabular-nums}
 .nav-links a[aria-current="page"]::after{transform:scaleX(1)}
 .nav-cta{margin-left:14px;min-height:44px;padding:10px 24px}
 .nav-cta::after{display:none}
+/* CTA бутонът е бял текст (.nav-links a color:ink иначе го надвива) */
+.nav-links .nav-cta{color:#fff}
+/* Хедърът се свива при скрол надолу */
+.nav.scrolled .nav-inner{height:60px}
+.nav.scrolled .nav-logo img{height:46px}
 
 /* Бургер (само mobile) */
 .burger{
@@ -265,7 +257,7 @@ time,.step-num{font-variant-numeric:tabular-nums}
 /* ============================================================
    3. Услуги — 6 карти с inline SVG икони
    ============================================================ */
-.services{background:var(--warm);padding:100px 0}
+.services{background:var(--warm);padding:72px 0}
 .services .sec-title{margin-bottom:52px}
 .srv-grid{
   display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
@@ -290,7 +282,7 @@ time,.step-num{font-variant-numeric:tabular-nums}
 /* ============================================================
    4. Как работим — 4 стъпки с тънки разделители
    ============================================================ */
-.steps{background:var(--white);padding:100px 0;border-top:1px solid var(--hair)}
+.steps{background:var(--white);padding:72px 0;border-top:1px solid var(--hair)}
 .steps .sec-title{margin-bottom:52px}
 .steps-grid{
   display:grid;grid-template-columns:repeat(4,1fr);
@@ -315,7 +307,7 @@ time,.step-num{font-variant-numeric:tabular-nums}
 /* ============================================================
    5. Формуляр за запитване
    ============================================================ */
-.inquiry{background:var(--white);padding:100px 0;scroll-margin-top:90px}
+.inquiry{background:var(--white);padding:72px 0;scroll-margin-top:90px}
 .inq-inner{max-width:760px;margin:0 auto}
 .inq-inner .sec-title{margin-bottom:14px}
 .inq-inner>p{color:var(--gray);margin-bottom:40px}
@@ -348,12 +340,12 @@ time,.step-num{font-variant-numeric:tabular-nums}
 }
 .field input::placeholder,.field textarea::placeholder{color:var(--muted)}
 .field input[aria-invalid="true"],.field select[aria-invalid="true"],.field textarea[aria-invalid="true"]{
-  border-color:#C4252D;border-width:2px;
+  border-color:#0F2D66;border-width:2px;
 }
 /* Грешка под полето — видим текст + role="alert" */
 .field-error{
   display:none;margin-top:8px;
-  color:#C4252D;font-weight:600;font-size:14px;
+  color:#0F2D66;font-weight:600;font-size:14px;
 }
 .field-error.show{display:block}
 .inq-form .btn{justify-self:start;min-width:220px}
@@ -368,7 +360,7 @@ time,.step-num{font-variant-numeric:tabular-nums}
 /* ============================================================
    6. Доверие — лента + 3 широки снимки
    ============================================================ */
-.trust{background:var(--white);padding:100px 0}
+.trust{background:var(--white);padding:72px 0}
 .trust .sec-title{font-size:clamp(32px,4.6vw,54px);margin-bottom:48px;max-width:20ch}
 .trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 .trust-grid figure{margin:0}
@@ -440,21 +432,7 @@ time,.step-num{font-variant-numeric:tabular-nums}
 .marquee-group img.inv{filter:invert(1);opacity:.75}
 @keyframes partnersScroll{to{transform:translateX(-50%)}}
 /* Пауза/пусни за лентата (WCAG 2.2.2) — като бутона на coverflow-а */
-.partners-head{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:26px}
-.partners-head .partners-label{margin-bottom:0}
-.marquee-pause{
-  flex:none;width:36px;height:36px;
-  display:inline-flex;align-items:center;justify-content:center;
-  border:1px solid var(--ink);color:var(--ink);border-radius:0;
-  transition:background .25s var(--ease),color .25s var(--ease);
-}
-.marquee-pause:hover{background:var(--ink);color:#fff}
-.marquee-pause .ic-play{display:none}
-.marquee-pause[aria-pressed="true"] .ic-pause{display:none}
-.marquee-pause[aria-pressed="true"] .ic-play{display:block}
-.marquee.paused .marquee-track{animation-play-state:paused}
-/* Без JS бутонът не прави нищо — крием го */
-html:not(.js) .marquee-pause{display:none}
+/* Партньорската лента се пауза само при hover/фокус (CSS) */
 
 /* ============================================================
    Scroll-reveal — САМО под .js (иначе всичко е видимо)
@@ -473,7 +451,6 @@ html:not(.js) .marquee-pause{display:none}
    ============================================================ */
 @view-transition{navigation:auto}
 .nav{view-transition-name:site-nav}
-.proto-bar{view-transition-name:proto-bar}
 
 /* ============================================================
    Reduced motion — без анимации
@@ -494,7 +471,6 @@ html:not(.js) .marquee-pause{display:none}
   .marquee-group{flex-wrap:wrap;justify-content:center;gap:28px;padding-right:0}
   .marquee-group[aria-hidden]{display:none}
   .marquee{-webkit-mask-image:none;mask-image:none}
-  .marquee-pause{display:none}
 }
 
 /* ============================================================
@@ -551,24 +527,22 @@ html:not(.js) .marquee-pause{display:none}
 })();
 </script>
 
-<!-- 0. Прототипна лента -->
-<div class="proto-bar"><b>ПРОТОТИП</b> · одобрена посока · снимките са реалните от сайта</div>
-
 <!-- 1. Навигация — единна за всички страници -->
 <header class="nav" id="nav">
   <div class="nav-inner">
     <nav class="nav-links nav-links--left" aria-label="Основна навигация — ляво">
       <a href="index.html">Начало</a>
       <a href="events.html">Събития</a>
-      <a href="organize-event.html" aria-current="page">Организирай събитие</a>
+      <a href="artisti.html">Артисти</a>
     </nav>
     <a href="index.html" class="nav-logo" aria-label="Red Donkey — начало">
       <img src="assets/logo-dark.svg" alt="Red Donkey" width="67" height="58">
     </a>
     <nav class="nav-links nav-links--right" aria-label="Основна навигация — дясно">
+      <a href="lokacii.html">Локации</a>
       <a href="za-nas.html">За нас</a>
-      <a href="#contacts">Контакти</a>
-      <a href="events.html" class="btn nav-cta">Билети</a>
+      <a href="kontakti.html">Контакти</a>
+      <a href="organize-event.html" class="btn nav-cta">Организирай събитие</a>
     </nav>
     <button class="burger" id="burger" aria-label="Отвори менюто" aria-expanded="false" aria-controls="mobileMenu">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
@@ -584,11 +558,12 @@ html:not(.js) .marquee-pause{display:none}
   <nav aria-label="Мобилна навигация">
     <a href="index.html">Начало</a>
     <a href="events.html">Събития</a>
-    <a href="organize-event.html" aria-current="page">Организирай събитие</a>
+    <a href="artisti.html">Артисти</a>
+    <a href="lokacii.html">Локации</a>
     <a href="za-nas.html">За нас</a>
-    <a href="#contacts">Контакти</a>
+    <a href="kontakti.html">Контакти</a>
   </nav>
-  <a href="events.html" class="btn">Билети</a>
+  <a href="organize-event.html" class="btn">Организирай събитие</a>
 </div>
 
 <main>
@@ -827,6 +802,8 @@ html:not(.js) .marquee-pause{display:none}
         <ul>
           <li><a href="index.html">Начало</a></li>
           <li><a href="events.html">Всички събития</a></li>
+          <li><a href="artisti.html">Артисти</a></li>
+          <li><a href="lokacii.html">Локации</a></li>
           <li><a href="organize-event.html">Организирай събитие</a></li>
         </ul>
       </div>
@@ -834,6 +811,7 @@ html:not(.js) .marquee-pause{display:none}
         <h3>Информация</h3>
         <ul>
           <li><a href="za-nas.html">За нас</a></li>
+          <li><a href="kontakti.html">Контакти</a></li>
           <li><a href="https://kupibileti.bg" target="_blank" rel="noopener">Билети: kupibileti.bg<span class="visually-hidden"> (отваря се в нов прозорец)</span></a></li>
         </ul>
       </div>
@@ -857,13 +835,7 @@ html:not(.js) .marquee-pause{display:none}
       </div>
     </div>
     <div class="footer-partners">
-      <div class="partners-head">
-        <p class="partners-label">Партньори и медии</p>
-        <button class="marquee-pause" id="marqueePause" aria-label="Спри въртенето на партньорските лога" aria-pressed="false">
-          <svg class="ic-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4h4v16H7zM13 4h4v16h-4z"/></svg>
-          <svg class="ic-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>
-        </button>
-      </div>
+      <p class="partners-label">Партньори и медии</p>
       <div class="marquee">
         <div class="marquee-track">
           <div class="marquee-group">
@@ -973,16 +945,6 @@ html:not(.js) .marquee-pause{display:none}
     if(!document.querySelector('.rv.in')) showAll();
   }, 2000);
 
-  /* ---------- Пауза на партньорската лента (WCAG 2.2.2) ---------- */
-  var mqBtn = document.getElementById('marqueePause');
-  if(mqBtn){
-    var mq = document.querySelector('.marquee');
-    mqBtn.addEventListener('click', function(){
-      var mqPaused = mq.classList.toggle('paused');
-      mqBtn.setAttribute('aria-pressed', mqPaused ? 'true' : 'false');
-      mqBtn.setAttribute('aria-label', mqPaused ? 'Пусни въртенето на партньорските лога' : 'Спри въртенето на партньорските лога');
-    });
-  }
 
   /* ---------- Форма за запитване (прототип: preventDefault) ---------- */
   var form = document.getElementById('inqForm');

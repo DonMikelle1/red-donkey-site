@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>За нас · Red Donkey</title>
-<meta name="description" content="Red Donkey Backstage Management — български организатор на концерти и живи събития от 2022 г. Кои сме ние, какво правим и защо концертите ни се помнят.">
+<title>Контакти · Red Donkey</title>
+<meta name="description" content="Свържи се с Red Donkey — office@reddonkey.bg, +359 88 6525262, гр. София, пл. България №1, НДК, вх. А3.">
 <!-- Маркираме, че JS работи — scroll-reveal стиловете важат САМО тогава -->
 <script>document.documentElement.classList.add('js')</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   RED DONKEY · ВАРИАНТ B — „ХИБРИД" · ПОДСТРАНИЦА: ЗА НАС
+   RED DONKEY · ВАРИАНТ B — „ХИБРИД" · ПОДСТРАНИЦА: КОНТАКТИ
    Изцяло светла страница — нейви само за дребни акценти.
    Остри ъгли навсякъде.
    ============================================================ */
@@ -95,7 +95,7 @@ time{font-variant-numeric:tabular-nums}
 }
 .sec-kicker::before{content:"";width:34px;height:2px;background:var(--brand)}
 /* Дребен акцент върху бяло — по-тъмно синьо за контраст */
-.story .sec-kicker,.moments .sec-kicker,.cta-band .sec-kicker{color:var(--brand-dk)}
+.cta-band .sec-kicker{color:var(--brand-dk)}
 
 /* Бутони — купибилетско синьо, остри ъгли, condensed */
 .btn{
@@ -229,58 +229,57 @@ time{font-variant-numeric:tabular-nums}
 }
 .page-sub strong{color:var(--ink);font-weight:600}
 
-/* ============================================================
-   3. Историята — кои сме ние
-   ============================================================ */
-.story{background:var(--warm);padding:66px 0}
-.story-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:56px;align-items:start}
-.story-copy p{color:var(--gray);font-size:17px;margin-bottom:18px;max-width:62ch}
-.story-copy p:last-child{margin-bottom:0}
-.story-copy b{color:var(--ink);font-weight:600}
-
-/* ============================================================
-   4. Какво правим — 3 колони
-   ============================================================ */
-.facts{background:var(--white);padding:66px 0;border-top:1px solid var(--hair)}
-.facts-head{margin-bottom:48px}
-.facts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-.fact{
-  background:var(--warm);border:1px solid var(--hair);
-  padding:32px 28px 34px;
+/* Контактните карти — email/телефон/офис (реални данни от reddonkey.bg) */
+.ct-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;padding:44px 0 22px}
+.ct-card{
+  background:var(--white);border:1px solid var(--hair);
+  padding:28px;display:flex;flex-direction:column;gap:8px;
   box-shadow:var(--shadow-sm);
   transition:transform .3s var(--ease),box-shadow .3s var(--ease);
 }
-.fact:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
-.fact svg{color:var(--brand);margin-bottom:18px}
-.fact h3{
-  font-family:var(--cond);font-weight:900;text-transform:uppercase;
-  font-size:22px;line-height:1.1;color:var(--ink);margin-bottom:10px;
-}
-.fact p{color:var(--gray);font-size:15px}
-
-/* ============================================================
-   5. Мигове — снимки от наши събития (ледът прелива в топлото)
-   ============================================================ */
-.moments{background:var(--white);padding:66px 0}
-.moments-head{margin-bottom:44px}
-.moments-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-.moment{border:1px solid var(--hair);background:var(--white);box-shadow:var(--shadow-md)}
-.moment-media{overflow:hidden;aspect-ratio:16/10}
-.moment-media img{
-  width:100%;height:100%;object-fit:cover;
-  transition:transform .4s var(--ease);
-}
-.moment:hover .moment-media img{transform:scale(1.04)}
-.moment figcaption{
-  padding:16px 20px;
+.ct-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.ct-card svg{color:var(--brand);margin-bottom:8px}
+.ct-card h3{
   font-family:var(--cond);font-weight:700;text-transform:uppercase;
-  letter-spacing:.1em;font-size:13px;color:var(--muted);
+  letter-spacing:.14em;font-size:13px;color:var(--muted);
 }
-
-/* ============================================================
-   6. CTA лента — „Организираш събитие?"
-   ============================================================ */
-.cta-band{background:var(--white);padding:64px 0}
+.ct-val{
+  font-family:var(--cond);font-weight:900;font-size:clamp(19px,1.8vw,24px);
+  line-height:1.2;color:var(--ink);word-break:break-word;
+}
+a.ct-val{transition:color .2s var(--ease)}
+a.ct-val:hover{color:var(--brand)}
+.ct-note{font-size:14px;color:var(--muted)}
+/* Формата за запитване */
+.ct-form-wrap{padding:40px 0 72px}
+.ct-form{
+  background:var(--white);border:1px solid var(--hair);box-shadow:var(--shadow-md);
+  padding:36px;max-width:760px;
+  display:grid;grid-template-columns:1fr 1fr;gap:20px 24px;
+}
+.ct-field{display:flex;flex-direction:column;gap:8px}
+.ct-field--full{grid-column:1/-1}
+.ct-field label{
+  font-family:var(--cond);font-weight:700;text-transform:uppercase;
+  letter-spacing:.14em;font-size:12px;color:var(--ink);
+}
+.ct-field input,.ct-field select,.ct-field textarea{
+  min-height:48px;padding:12px 14px;
+  font-family:var(--body);font-size:16px;color:var(--ink);
+  background:var(--white);border:1px solid #D9C2C4;border-radius:0;
+}
+.ct-field textarea{min-height:130px;resize:vertical}
+.ct-field input:focus-visible,.ct-field select:focus-visible,.ct-field textarea:focus-visible{
+  outline:2px solid var(--brand);outline-offset:0;
+}
+.ct-form .btn{grid-column:1/-1;justify-self:start}
+.ct-error{display:none;grid-column:1/-1;color:var(--brand-dk);font-weight:600;font-size:14px}
+.ct-error.show{display:block}
+.ct-success{display:none;grid-column:1/-1;align-items:center;gap:10px;color:var(--ink);font-weight:600}
+.ct-success.show{display:flex}
+@media(max-width:900px){.ct-grid{grid-template-columns:1fr;gap:18px}.ct-form{grid-template-columns:1fr;padding:24px}}
+/* CTA лента — „Организираш събитие?" */
+.cta-band{background:var(--white);padding:64px 0;border-top:1px solid var(--hair)}
 .cta-inner{
   display:flex;align-items:center;justify-content:space-between;
   gap:32px;flex-wrap:wrap;
@@ -447,8 +446,8 @@ time{font-variant-numeric:tabular-nums}
     </a>
     <nav class="nav-links nav-links--right" aria-label="Основна навигация — дясно">
       <a href="lokacii.html">Локации</a>
-      <a href="za-nas.html" aria-current="page">За нас</a>
-      <a href="kontakti.html">Контакти</a>
+      <a href="za-nas.html">За нас</a>
+      <a href="kontakti.html" aria-current="page">Контакти</a>
       <a href="organize-event.html" class="btn nav-cta">Организирай събитие</a>
     </nav>
     <button class="burger" id="burger" aria-label="Отвори менюто" aria-expanded="false" aria-controls="mobileMenu">
@@ -467,8 +466,8 @@ time{font-variant-numeric:tabular-nums}
     <a href="events.html">Събития</a>
     <a href="artisti.html">Артисти</a>
     <a href="lokacii.html">Локации</a>
-    <a href="za-nas.html" aria-current="page">За нас</a>
-    <a href="kontakti.html">Контакти</a>
+    <a href="za-nas.html">За нас</a>
+    <a href="kontakti.html" aria-current="page">Контакти</a>
   </nav>
   <a href="organize-event.html" class="btn">Организирай събитие</a>
 </div>
@@ -478,87 +477,79 @@ time{font-variant-numeric:tabular-nums}
 <!-- 2. Page-header -->
 <section class="page-header">
   <div class="wrap">
-    <span class="sec-kicker">Червеното магаре</span>
-    <h1 class="sec-title">За нас</h1>
-    <p class="page-sub"><strong>Red Donkey Backstage Management</strong> — български организатор на концерти и живи събития от 2022 г.</p>
+    <span class="sec-kicker">Тук сме</span>
+    <h1 class="sec-title">Контакти</h1>
+    <p class="page-sub">Имаш въпрос или предложение? Свържи се с нас.</p>
   </div>
 </section>
 
-<!-- 3. Историята -->
-<section class="story">
+<!-- 3. Контактни данни (реални, от reddonkey.bg) -->
+<section aria-label="Контактни данни">
   <div class="wrap">
-    <div class="story-grid">
-      <div class="rv">
-        <span class="sec-kicker">Кои сме ние</span>
-        <h2 class="sec-title">Правим концертите незабравими</h2>
+    <div class="ct-grid">
+      <div class="ct-card rv">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14"/><path d="M3 7l9 6 9-6"/></svg>
+        <h3>Email</h3>
+        <a class="ct-val" href="mailto:office@reddonkey.bg">office@reddonkey.bg</a>
+        <p class="ct-note">Отговаряме в рамките на работния ден.</p>
       </div>
-      <div class="story-copy rv">
-        <p>Red Donkey е екипът зад някои от големите концертни вечери в България. От 2022 г. насам организираме концерти и турнета на едни от най-обичаните изпълнители — <b>Тони Стораро, Ку-Ку Бенд и Ивана, Софи Маринова, Фики Стораро, Тони Димитрова</b> — в зали от Арена 8888 София до НДК.</p>
-        <p>Освен големите сцени, <b>Red Donkey Backstage Management</b> поема и частни и корпоративни събития от край до край: сватби, партита и тържества — с кетъринг, техника, сцена и ангажиране на артисти.</p>
-        <p>Билетите за нашите събития се разпространяват чрез билетния ни партньор <b>kupibileti.bg</b>. Ще ни намерите в НДК, вх. А3, гр. София.</p>
+      <div class="ct-card rv">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+        <h3>Телефон</h3>
+        <a class="ct-val" href="tel:+359886525262">+359 88 6525262</a>
+        <p class="ct-note">Пон–Пет: 10:00–18:00</p>
+      </div>
+      <div class="ct-card rv">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+        <h3>Офис</h3>
+        <p class="ct-val">гр. София, пл. България №1</p>
+        <p class="ct-note">НДК, вх. А3 · <a href="https://maps.google.com/?q=НДК+София" target="_blank" rel="noopener" style="text-decoration:underline">виж на картата<span class="visually-hidden"> (отваря се в нов прозорец)</span></a></p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 4. Какво правим -->
-<section class="facts">
+<!-- 4. Форма за съобщение (прототип — не изпраща реално) -->
+<section class="ct-form-wrap" aria-label="Изпрати съобщение">
   <div class="wrap">
-    <div class="facts-head rv">
-      <span class="sec-kicker">Какво правим</span>
-      <h2 class="sec-title">Три неща, но както трябва</h2>
+    <div class="rv" style="margin-bottom:28px">
+      <span class="sec-kicker">Пиши ни</span>
+      <h2 class="sec-title" style="font-size:clamp(30px,4vw,48px)">Изпрати съобщение</h2>
     </div>
-    <div class="facts-grid">
-      <div class="fact rv">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18V6l11-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></svg>
-        <h3>Концерти и турнета</h3>
-        <p>Организираме концерти и национални турнета — от афиша и залата до последния бис. В цялата страна, целогодишно.</p>
+    <form class="ct-form rv" id="ctForm">
+      <div class="ct-field">
+        <label for="ctName">Име</label>
+        <input type="text" id="ctName" name="name" required autocomplete="name">
       </div>
-      <div class="fact rv">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.9-5.2-2.7-5.2 2.7 1-5.9L3.5 9.2l5.9-.9z"/></svg>
-        <h3>Частни събития</h3>
-        <p>Сватби, корпоративни партита и тържества — Backstage Management екипът поема всичко: кетъринг, техника, сцена, артисти.</p>
+      <div class="ct-field">
+        <label for="ctEmail">Email</label>
+        <input type="email" id="ctEmail" name="email" required autocomplete="email">
       </div>
-      <div class="fact rv">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 17V7l8-4 8 4v10l-8 4z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg>
-        <h3>От край до край</h3>
-        <p>Едно място за целия процес: планиране, продукция, билети през kupibileti.bg и промоция с медийните ни партньори.</p>
+      <div class="ct-field ct-field--full">
+        <label for="ctTopic">Тема</label>
+        <select id="ctTopic" name="topic">
+          <option>Общ въпрос</option>
+          <option>Въпрос за билети</option>
+          <option>Медийни запитвания</option>
+          <option>Партньорство</option>
+          <option>Артист мениджмънт</option>
+        </select>
       </div>
-    </div>
+      <div class="ct-field ct-field--full">
+        <label for="ctMsg">Съобщение</label>
+        <textarea id="ctMsg" name="message" required></textarea>
+      </div>
+      <button type="submit" class="btn">Изпрати</button>
+      <p class="ct-error" id="ctError" role="alert"></p>
+      <p class="ct-success" id="ctSuccess" role="status">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
+        Благодарим! Ще се свържем с теб възможно най-скоро.
+      </p>
+    </form>
   </div>
 </section>
 
-<!-- 5. Мигове от наши събития -->
-<section class="moments">
-  <div class="wrap">
-    <div class="moments-head rv">
-      <span class="sec-kicker">На живо</span>
-      <h2 class="sec-title">Мигове от нашите събития</h2>
-    </div>
-    <div class="moments-grid">
-      <figure class="moment rv">
-        <div class="moment-media">
-          <picture>
-            <source srcset="assets/past/mazonakis.webp" type="image/webp">
-            <img src="assets/past/mazonakis.jpg" alt="Йоргос Мазонакис на сцена пред публика" width="1200" height="750" loading="lazy">
-          </picture>
-        </div>
-        <figcaption>Йоргос Мазонакис · на сцена</figcaption>
-      </figure>
-      <figure class="moment rv">
-        <div class="moment-media">
-          <picture>
-            <source srcset="assets/past/toni-bday.webp" type="image/webp">
-            <img src="assets/past/toni-bday.jpg" alt="Тони Димитрова на сцена по време на концерт" width="1200" height="750" loading="lazy">
-          </picture>
-        </div>
-        <figcaption>Тони Димитрова · концерт</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<!-- 6. CTA лента -->
+<!-- CTA лента -->
 <section class="cta-band">
   <div class="wrap">
     <div class="cta-inner rv">
@@ -730,6 +721,29 @@ time{font-variant-numeric:tabular-nums}
   setTimeout(function(){
     if(!document.querySelector('.rv.in')) showAll();
   }, 2000);
+
+
+  /* ---------- Контактна форма (прототип) ---------- */
+  var ctForm = document.getElementById('ctForm');
+  if(ctForm){
+    ctForm.setAttribute('novalidate','');
+    var ctErr = document.getElementById('ctError');
+    var ctOk = document.getElementById('ctSuccess');
+    ctForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      var nm = document.getElementById('ctName');
+      var em = document.getElementById('ctEmail');
+      var ms = document.getElementById('ctMsg');
+      if(!nm.value.trim() || !em.value || em.value.indexOf('@') < 1 || !ms.value.trim()){
+        ctErr.textContent = 'Моля, попълни име, валиден email и съобщение.';
+        ctErr.classList.add('show'); ctOk.classList.remove('show');
+        return;
+      }
+      ctErr.classList.remove('show'); ctErr.textContent = '';
+      ctOk.classList.add('show');
+      ctForm.reset();
+    });
+  }
 
 })();
 </script>

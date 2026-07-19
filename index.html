@@ -27,22 +27,26 @@
   --ink:#16151A;
   --gray:#444444;
   --muted:#5C6975;
-  --brand:#E31E24;
-  --brand-dk:#C4252D;
+  --brand:#153d8a;
+  --brand-dk:#0F2D66;
+  --kupi:#153d8a;         /* купибилетско синьо — плътните бутони */
+  --kupi-dk:#0F2D66;
+  --shadow-blue:0 8px 20px rgba(21,61,138,.24);
+  --shadow-blue-hover:0 12px 26px rgba(21,61,138,.32);
   --warm:#FFFFFF;        /* сайтът е изцяло чисто бял */
   --hair:#F0E2E3;        /* тънки бордюри на картите */
   --cond:'Roboto Condensed', Arial, sans-serif;
   --body:'Inter', Arial, sans-serif;
   --ease:cubic-bezier(.22,1,.36,1);
 
-  /* Сенки: ЧЕРВЕНИ, в тон с логото — плътна контактна +
-     мека разлята върху чисто бялото. */
-  --shadow-sm:0 1px 2px rgba(196,37,45,.06),0 3px 10px rgba(196,37,45,.08);
-  --shadow-md:0 2px 6px rgba(196,37,45,.08),0 14px 28px rgba(196,37,45,.12);
-  --shadow-lg:0 6px 14px rgba(196,37,45,.09),0 28px 56px rgba(196,37,45,.16);
-  --shadow-hover:0 8px 18px rgba(196,37,45,.11),0 34px 64px rgba(196,37,45,.19);
-  --shadow-red:0 8px 20px rgba(196,37,45,.22);
-  --shadow-red-hover:0 12px 26px rgba(196,37,45,.30);
+  /* Сенки: неутрален слейт — плътна контактна + мека разлята
+     върху чисто бялото (без цвят). */
+  --shadow-sm:0 1px 2px rgba(38,56,72,.06),0 3px 10px rgba(38,56,72,.08);
+  --shadow-md:0 2px 6px rgba(38,56,72,.08),0 14px 28px rgba(38,56,72,.12);
+  --shadow-lg:0 6px 14px rgba(38,56,72,.09),0 28px 56px rgba(38,56,72,.16);
+  --shadow-hover:0 8px 18px rgba(38,56,72,.11),0 34px 64px rgba(38,56,72,.19);
+  --shadow-red:0 8px 20px rgba(38,56,72,.22);
+  --shadow-red-hover:0 12px 26px rgba(38,56,72,.30);
 }
 
 /* ---------- Reset / база ---------- */
@@ -54,7 +58,6 @@ body{
   color:var(--ink);
   background:var(--warm);
   overflow-x:hidden;overflow-x:clip; /* clip не прави body scroll container — иначе view() timeline-ът се закача за body */
-  padding-bottom:26px;   /* място за фиксираната прото-лента в дъното */
 }
 img{max-width:100%;height:auto;display:block}
 picture{display:contents}          /* критично: <picture> да не чупи layout-а */
@@ -65,10 +68,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   outline:2px solid var(--brand);outline-offset:3px;
 }
 
-/* Курсор: червеното магаренце от логото — само магарето, плътно
-   (ново име на файла = никакъв стар кеш). Интерактивните елементи
-   пазят системния pointer/зуум курсор. */
-html{cursor:url("assets/cursor-donkey2.png") 2 6, auto}
 
 
 /* Числата — табулярни */
@@ -97,21 +96,21 @@ time,.price,.ev-date{font-variant-numeric:tabular-nums}
 }
 .sec-kicker::before{content:"";width:34px;height:2px;background:var(--brand)}
 
-/* Бутони — плътно червено, остри ъгли, condensed */
+/* Бутони — купибилетско синьо, остри ъгли, condensed */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:10px;
   min-height:48px;padding:13px 30px;
-  background:var(--brand);color:#fff;
+  background:var(--kupi);color:#fff;
   font-family:var(--cond);font-weight:700;text-transform:uppercase;
   letter-spacing:.08em;font-size:15px;
-  border-radius:0;border:2px solid var(--brand);
-  box-shadow:var(--shadow-red);
+  border-radius:0;border:2px solid var(--kupi);
+  box-shadow:var(--shadow-blue);
   transition:background .25s var(--ease),border-color .25s var(--ease),
              transform .25s var(--ease),box-shadow .25s var(--ease);
 }
 .btn:hover{
-  background:var(--brand-dk);border-color:var(--brand-dk);
-  transform:translateY(-2px);box-shadow:var(--shadow-red-hover);
+  background:var(--kupi-dk);border-color:var(--kupi-dk);
+  transform:translateY(-2px);box-shadow:var(--shadow-blue-hover);
 }
 .btn-ghost{
   background:transparent;color:#fff;border:2px solid rgba(255,255,255,.85);
@@ -126,18 +125,6 @@ time,.price,.ev-date{font-variant-numeric:tabular-nums}
 .btn--ghost-dark:hover{background:var(--ink);border-color:var(--ink);color:#fff;transform:translateY(-2px)}
 .btn svg{flex:none}
 
-/* ============================================================
-   0. Тънка прототипна лента — FIXED в дъното, над всичко
-   ============================================================ */
-.proto-bar{
-  position:fixed;left:0;right:0;bottom:0;z-index:100;
-  height:26px;display:flex;align-items:center;justify-content:center;
-  background:#fff;border-top:1px solid var(--hair);color:var(--muted);
-  font-family:var(--cond);font-size:11px;letter-spacing:.2em;
-  text-transform:uppercase;text-align:center;
-  padding:0 12px;
-}
-.proto-bar b{color:var(--brand-dk);font-weight:700;margin-right:4px}
 
 /* ============================================================
    Лоудър: магарето от логото + зареждаща линия. Само под .js
@@ -173,17 +160,17 @@ time,.price,.ev-date{font-variant-numeric:tabular-nums}
   transition:box-shadow .3s var(--ease);
 }
 .nav.scrolled{
-  box-shadow:0 4px 10px rgba(196,37,45,.06),0 12px 32px rgba(196,37,45,.10);
+  box-shadow:0 4px 10px rgba(38,56,72,.06),0 12px 32px rgba(38,56,72,.10);
 }
 .nav-inner{
   max-width:1240px;margin:0 auto;padding:0 24px;
   display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
-  height:76px;
+  height:76px;transition:height .3s var(--ease);
 }
 /* Логото в средата (по-голямо), линковете прилепени до него; бургерът
    дели дясната клетка с дясната група — никога не са едновременно видими */
 .nav-logo{grid-column:2;grid-row:1;justify-self:center}
-.nav-logo img{height:58px;width:auto}
+.nav-logo img{height:58px;width:auto;transition:height .3s var(--ease)}
 .nav-links{display:flex;align-items:center;gap:6px}
 .nav-links--left{grid-column:1;grid-row:1;justify-self:end;margin-right:18px}
 .nav-links--right{grid-column:3;grid-row:1;justify-self:start;margin-left:18px}
@@ -204,6 +191,11 @@ time,.price,.ev-date{font-variant-numeric:tabular-nums}
 .nav-links a[aria-current="page"]::after{transform:scaleX(1)}
 .nav-cta{margin-left:14px;min-height:44px;padding:10px 24px}
 .nav-cta::after{display:none}
+/* CTA бутонът е бял текст (.nav-links a color:ink иначе го надвива) */
+.nav-links .nav-cta{color:#fff}
+/* Хедърът се свива при скрол надолу */
+.nav.scrolled .nav-inner{height:60px}
+.nav.scrolled .nav-logo img{height:46px}
 
 /* Бургер (само mobile) */
 .burger{
@@ -296,7 +288,7 @@ time,.price,.ev-date{font-variant-numeric:tabular-nums}
 /* ============================================================
    3. Предстоящи събития — топло бяло, тъмни гигантски заглавия
    ============================================================ */
-.events{background:var(--warm);padding:110px 0 120px}
+.events{background:var(--warm);padding:78px 0 84px}
 .events-head{
   display:flex;align-items:flex-end;justify-content:space-between;
   gap:24px;margin-bottom:52px;flex-wrap:wrap;
@@ -307,7 +299,7 @@ time,.price,.ev-date{font-variant-numeric:tabular-nums}
    несъбудените редове избледняват (spotlight). Афишите ВИНАГИ се виждат. */
 .evl{position:relative;border-top:1px solid var(--ink)}
 .evl-row{
-  display:grid;grid-template-columns:44px 132px minmax(0,1fr) auto 44px;
+  display:grid;grid-template-columns:44px 132px minmax(0,1fr) auto auto;
   align-items:center;gap:0 26px;padding:24px 8px;
   border-bottom:1px solid var(--hair);position:relative;color:var(--ink);
   transition:opacity .3s var(--ease);
@@ -329,12 +321,6 @@ time,.price,.ev-date{font-variant-numeric:tabular-nums}
   transition:transform .4s var(--ease),box-shadow .4s var(--ease),opacity .3s var(--ease);
 }
 .evl-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
-.evl-thumb__no{
-  position:absolute;top:0;left:0;z-index:1;
-  background:var(--navy);color:var(--ice);
-  font-family:var(--cond);font-weight:700;letter-spacing:.12em;
-  font-size:10px;padding:4px 7px;
-}
 .evl-main{display:flex;flex-direction:column;min-width:0}
 .evl-tag{
   align-self:flex-start;margin-bottom:10px;
@@ -348,24 +334,23 @@ time,.price,.ev-date{font-variant-numeric:tabular-nums}
   color:var(--ink);transition:transform .4s var(--ease),color .3s var(--ease);
 }
 .evl-venue{margin-top:8px;font-size:14px;color:var(--muted);line-height:1.4}
+/* Цената: „ОТ" отделено с разстояние (беше слято „от30евро") */
+.evl-meta .price{font-family:var(--cond);font-weight:700;font-size:18px;color:var(--ink)}
+.evl-meta .price small{
+  font-family:var(--body);font-weight:500;font-size:11px;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.08em;margin-right:6px;
+}
 /* Хедлайнер акцент на първия ред */
 .evl-row--lead .evl-name{font-size:clamp(26px,3.8vw,54px)}
-.evl-lead-badge{
-  display:inline-block;margin-left:12px;vertical-align:middle;
-  background:var(--brand);color:#fff;
-  font-family:var(--cond);font-weight:700;text-transform:uppercase;
-  letter-spacing:.12em;font-size:10px;padding:3px 8px;
-}
 .evl-meta{display:flex;flex-direction:column;gap:6px;text-align:right;align-items:flex-end;white-space:nowrap}
-.evl-go{display:flex;align-items:center;justify-content:flex-end;color:var(--muted)}
-.evl-go svg{transition:transform .3s var(--ease),color .3s var(--ease)}
+/* Видим бутон „Билети" на всеки ред (визуален — целият ред е линкът) */
+.evl-buy{min-height:44px;padding:10px 24px;font-size:14px;white-space:nowrap}
 /* Микро-интеракции (hover И клавиатурен фокус) */
 .evl-row:hover .evl-thumb,.evl-row:focus-visible .evl-thumb{transform:translateY(-6px) scale(1.04);box-shadow:var(--shadow-lg);z-index:2}
 .evl-row:hover .evl-thumb img,.evl-row:focus-visible .evl-thumb img{transform:scale(1.07)}
 .evl-row:hover .evl-name,.evl-row:focus-visible .evl-name{transform:translateX(12px)}
 .evl-row:hover .evl-idx,.evl-row:focus-visible .evl-idx{color:var(--brand)}
 .evl-row:hover .evl-marker,.evl-row:focus-visible .evl-marker{transform:scaleY(1)}
-.evl-row:hover .evl-go svg,.evl-row:focus-visible .evl-go svg{transform:translateX(6px);color:var(--brand)}
 /* Spotlight (само мишка): затъмняваме само АФИШИТЕ, не текста — мета-
    контрастът остава над WCAG AA (ревю находка). Активният афиш е ярък. */
 .evl:hover .evl-thumb{opacity:.5}
@@ -373,8 +358,9 @@ time,.price,.ev-date{font-variant-numeric:tabular-nums}
 /* Мобилно: афиш вляво (span), име горе-дясно, мета долу-дясно */
 @media(max-width:820px){
   .evl-row{grid-template-columns:104px 1fr;gap:0 18px;
-    grid-template-areas:"thumb main" "thumb meta";align-items:start;padding:22px 4px}
-  .evl-idx,.evl-go{display:none}
+    grid-template-areas:"thumb main" "thumb meta" "buy buy";align-items:start;padding:22px 4px}
+  .evl-idx{display:none}
+  .evl-buy{grid-area:buy;justify-self:start;margin-top:14px}
   .evl-thumb{width:104px;grid-area:thumb}
   .evl-main{grid-area:main}
   .evl-meta{grid-area:meta;text-align:left;align-items:flex-start;margin-top:12px;white-space:normal}
@@ -387,11 +373,11 @@ time,.price,.ev-date{font-variant-numeric:tabular-nums}
 /* ============================================================
    4. B2B — светла секция с organize-bg
    ============================================================ */
-.b2b{background:var(--white);padding:110px 0;border-top:1px solid var(--hair)}
+.b2b{background:var(--white);padding:78px 0;border-top:1px solid var(--hair)}
 .b2b-grid{
   display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center;
 }
-.b2b-media{overflow:hidden;border:1px solid var(--hair);box-shadow:var(--shadow-lg)}
+.b2b-media{overflow:hidden;border:1px solid var(--hair)}
 .b2b-media img{
   width:100%;height:auto;
   transition:transform .4s var(--ease);
@@ -403,7 +389,7 @@ time,.price,.ev-date{font-variant-numeric:tabular-nums}
 /* ============================================================
    5. Newsletter — „БЪДИ В КРЪГА" на хладно светло сиво
    ============================================================ */
-.newsletter{background:var(--white);padding:100px 0}
+.newsletter{background:var(--white);padding:72px 0}
 .nl-inner{max-width:760px;margin:0 auto;text-align:center}
 .nl-inner .sec-title{margin-bottom:14px}
 .nl-inner>p{color:var(--gray);margin-bottom:34px}
@@ -420,7 +406,7 @@ time,.price,.ev-date{font-variant-numeric:tabular-nums}
 /* Грешка под полето — видим текст + role="alert" */
 .nl-error{
   display:none;margin-top:12px;
-  color:#C4252D;font-weight:600;font-size:14px;
+  color:#0F2D66;font-weight:600;font-size:14px;
 }
 .nl-error.show{display:block}
 /* Успех — тъмно мастило (не зелено) */
@@ -486,21 +472,7 @@ time,.price,.ev-date{font-variant-numeric:tabular-nums}
 .marquee-group img.inv{filter:invert(1);opacity:.75}
 @keyframes partnersScroll{to{transform:translateX(-50%)}}
 /* Пауза/пусни за лентата (WCAG 2.2.2) — квадратен, в езика на сайта */
-.partners-head{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:26px}
-.partners-head .partners-label{margin-bottom:0}
-.marquee-pause{
-  flex:none;width:36px;height:36px;
-  display:inline-flex;align-items:center;justify-content:center;
-  border:1px solid var(--ink);color:var(--ink);border-radius:0;
-  transition:background .25s var(--ease),color .25s var(--ease);
-}
-.marquee-pause:hover{background:var(--ink);color:#fff}
-.marquee-pause .ic-play{display:none}
-.marquee-pause[aria-pressed="true"] .ic-pause{display:none}
-.marquee-pause[aria-pressed="true"] .ic-play{display:block}
-.marquee.paused .marquee-track{animation-play-state:paused}
-/* Без JS бутонът не прави нищо — крием го */
-html:not(.js) .marquee-pause{display:none}
+/* Партньорската лента се пауза само при hover/фокус (CSS) */
 
 /* ============================================================
    Scroll-reveal — САМО под .js (иначе всичко е видимо)
@@ -576,12 +548,13 @@ html:not(.js) .cg{-webkit-mask-image:none;mask-image:none}
    бутоните са скрити, но изникват при клавиатурен фокус (достъпност). */
 .cg-nav{
   position:absolute;top:50%;z-index:4;transform:translateY(-50%);
-  width:48px;height:48px;display:flex;align-items:center;justify-content:center;
+  width:40px;height:40px;display:flex;align-items:center;justify-content:center;
   background:rgba(255,255,255,.92);border:1px solid var(--ink);color:var(--ink);
   box-shadow:var(--shadow-sm);
   transition:background .2s var(--ease),color .2s var(--ease),opacity .2s var(--ease);
 }
 .cg-nav:hover{background:var(--ink);color:#fff}
+.cg-nav svg{width:18px;height:18px}
 .cg-nav--prev{left:12px}
 .cg-nav--next{right:12px}
 @media(hover:hover) and (pointer:fine){
@@ -625,7 +598,6 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
    ============================================================ */
 @view-transition{navigation:auto}
 .nav{view-transition-name:site-nav}
-.proto-bar{view-transition-name:proto-bar}
 
 /* ============================================================
    Reduced motion — без анимации и без авто-превъртане (в JS)
@@ -647,7 +619,6 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
   .marquee-group{flex-wrap:wrap;justify-content:center;gap:28px;padding-right:0}
   .marquee-group[aria-hidden]{display:none}
   .marquee{-webkit-mask-image:none;mask-image:none}
-  .marquee-pause{display:none}
 }
 
 /* ============================================================
@@ -698,24 +669,22 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
 })();
 </script>
 
-<!-- 0. Прототипна лента -->
-<div class="proto-bar"><b>ПРОТОТИП</b> · одобрена посока · снимките са реалните от сайта</div>
-
 <!-- 1. Навигация -->
 <header class="nav" id="nav">
   <div class="nav-inner">
     <nav class="nav-links nav-links--left" aria-label="Основна навигация — ляво">
       <a href="index.html" aria-current="page">Начало</a>
       <a href="events.html">Събития</a>
-      <a href="organize-event.html">Организирай събитие</a>
+      <a href="artisti.html">Артисти</a>
     </nav>
     <a href="index.html" class="nav-logo" aria-label="Red Donkey — начало">
       <img src="assets/logo-dark.svg" alt="Red Donkey" width="67" height="58">
     </a>
     <nav class="nav-links nav-links--right" aria-label="Основна навигация — дясно">
+      <a href="lokacii.html">Локации</a>
       <a href="za-nas.html">За нас</a>
-      <a href="#contacts">Контакти</a>
-      <a href="events.html" class="btn nav-cta">Билети</a>
+      <a href="kontakti.html">Контакти</a>
+      <a href="organize-event.html" class="btn nav-cta">Организирай събитие</a>
     </nav>
     <button class="burger" id="burger" aria-label="Отвори менюто" aria-expanded="false" aria-controls="mobileMenu">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
@@ -731,11 +700,12 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
   <nav aria-label="Мобилна навигация">
     <a href="index.html" aria-current="page">Начало</a>
     <a href="events.html">Събития</a>
-    <a href="organize-event.html">Организирай събитие</a>
+    <a href="artisti.html">Артисти</a>
+    <a href="lokacii.html">Локации</a>
     <a href="za-nas.html">За нас</a>
-    <a href="#contacts">Контакти</a>
+    <a href="kontakti.html">Контакти</a>
   </nav>
-  <a href="events.html" class="btn">Билети</a>
+  <a href="organize-event.html" class="btn">Организирай събитие</a>
 </div>
 
 <main>
@@ -750,7 +720,7 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
       <a href="events.html" class="btn">Всички събития
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a href="organize-event.html" class="btn btn--ghost-dark">Организирай събитие</a>
+      <a href="organize-event.html" class="btn">Организирай събитие</a>
     </div>
   </div>
   <!-- Същите афиши са в решетката по-долу с пълната информация -->
@@ -819,25 +789,23 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
         <span class="evl-marker" aria-hidden="true"></span>
         <span class="evl-thumb" aria-hidden="true">
           <picture><source srcset="assets/events/toni-dimitrova-2026.webp" type="image/webp"><img src="assets/events/toni-dimitrova-2026.jpg" alt="" width="800" height="800" loading="lazy"></picture>
-          <span class="evl-thumb__no">№ 01</span>
         </span>
         <span class="evl-main">
           <span class="evl-tag">Поп / Турне</span>
-          <h3 class="evl-name">Тони Димитрова — Турне 2026<span class="evl-lead-badge">Хедлайнер</span></h3>
+          <h3 class="evl-name">Тони Димитрова — Турне 2026</h3>
           <span class="evl-venue">Пловдив · Бургас · Варна · Русе · София (НДК)</span>
         </span>
         <span class="evl-meta">
           <span class="ev-date">Август 2026 – Януари 2027</span>
-          <span class="price"><small>от</small>25 евро</span>
+          <span class="price"><small>от</small> 25 евро</span>
         </span>
-        <span class="evl-go" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="btn evl-buy">Билети</span>
       </a>
       <a class="evl-row rv" href="https://kupibileti.bg" target="_blank" rel="noopener" data-i="1">
         <span class="evl-idx" aria-hidden="true">02</span>
         <span class="evl-marker" aria-hidden="true"></span>
         <span class="evl-thumb" aria-hidden="true">
           <picture><source srcset="assets/events/ku-ku-ivana-2026.webp" type="image/webp"><img src="assets/events/ku-ku-ivana-2026.jpg" alt="" width="800" height="800" loading="lazy"></picture>
-          <span class="evl-thumb__no">№ 02</span>
         </span>
         <span class="evl-main">
           <span class="evl-tag">Поп</span>
@@ -846,16 +814,15 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
         </span>
         <span class="evl-meta">
           <span class="ev-date">СБ · 17.10.2026</span>
-          <span class="price"><small>от</small>45 евро</span>
+          <span class="price"><small>от</small> 45 евро</span>
         </span>
-        <span class="evl-go" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="btn evl-buy">Билети</span>
       </a>
       <a class="evl-row rv" href="event-toni-storaro.html" data-i="2">
         <span class="evl-idx" aria-hidden="true">03</span>
         <span class="evl-marker" aria-hidden="true"></span>
         <span class="evl-thumb" aria-hidden="true">
           <picture><source srcset="assets/events/toni-storaro.webp" type="image/webp"><img src="assets/events/toni-storaro.jpg" alt="" width="800" height="800" loading="lazy"></picture>
-          <span class="evl-thumb__no">№ 03</span>
         </span>
         <span class="evl-main">
           <span class="evl-tag">Попфолк</span>
@@ -864,16 +831,15 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
         </span>
         <span class="evl-meta">
           <span class="ev-date">ПТ · 13.11.2026</span>
-          <span class="price"><small>от</small>40 евро</span>
+          <span class="price"><small>от</small> 40 евро</span>
         </span>
-        <span class="evl-go" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="btn evl-buy">Билети</span>
       </a>
       <a class="evl-row rv" href="https://kupibileti.bg" target="_blank" rel="noopener" data-i="3">
         <span class="evl-idx" aria-hidden="true">04</span>
         <span class="evl-marker" aria-hidden="true"></span>
         <span class="evl-thumb" aria-hidden="true">
           <picture><source srcset="assets/events/sofi-marinova-2027.webp" type="image/webp"><img src="assets/events/sofi-marinova-2027.jpg" alt="" width="800" height="800" loading="lazy"></picture>
-          <span class="evl-thumb__no">№ 04</span>
         </span>
         <span class="evl-main">
           <span class="evl-tag">Попфолк</span>
@@ -882,16 +848,15 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
         </span>
         <span class="evl-meta">
           <span class="ev-date">НД · 05.12.2027</span>
-          <span class="price"><small>от</small>30 евро</span>
+          <span class="price"><small>от</small> 30 евро</span>
         </span>
-        <span class="evl-go" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="btn evl-buy">Билети</span>
       </a>
       <a class="evl-row rv" href="https://kupibileti.bg" target="_blank" rel="noopener" data-i="4">
         <span class="evl-idx" aria-hidden="true">05</span>
         <span class="evl-marker" aria-hidden="true"></span>
         <span class="evl-thumb" aria-hidden="true">
           <picture><source srcset="assets/events/fiki-storaro-2027.webp" type="image/webp"><img src="assets/events/fiki-storaro-2027.jpg" alt="" width="800" height="800" loading="lazy"></picture>
-          <span class="evl-thumb__no">№ 05</span>
         </span>
         <span class="evl-main">
           <span class="evl-tag">Попфолк</span>
@@ -900,9 +865,9 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
         </span>
         <span class="evl-meta">
           <span class="ev-date">2027 · дата: очаквайте</span>
-          <span class="price"><small>от</small>35 евро</span>
+          <span class="price"><small>от</small> 35 евро</span>
         </span>
-        <span class="evl-go" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="btn evl-buy">Билети</span>
       </a>
     </div>
   </div>
@@ -966,6 +931,8 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
         <ul>
           <li><a href="index.html">Начало</a></li>
           <li><a href="events.html">Всички събития</a></li>
+          <li><a href="artisti.html">Артисти</a></li>
+          <li><a href="lokacii.html">Локации</a></li>
           <li><a href="organize-event.html">Организирай събитие</a></li>
         </ul>
       </div>
@@ -973,6 +940,7 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
         <h3>Информация</h3>
         <ul>
           <li><a href="za-nas.html">За нас</a></li>
+          <li><a href="kontakti.html">Контакти</a></li>
           <li><a href="https://kupibileti.bg" target="_blank" rel="noopener">Билети: kupibileti.bg<span class="visually-hidden"> (отваря се в нов прозорец)</span></a></li>
         </ul>
       </div>
@@ -996,13 +964,7 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
       </div>
     </div>
     <div class="footer-partners">
-      <div class="partners-head">
-        <p class="partners-label">Партньори и медии</p>
-        <button class="marquee-pause" id="marqueePause" aria-label="Спри въртенето на партньорските лога" aria-pressed="false">
-          <svg class="ic-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4h4v16H7zM13 4h4v16h-4z"/></svg>
-          <svg class="ic-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>
-        </button>
-      </div>
+      <p class="partners-label">Партньори и медии</p>
       <div class="marquee">
         <div class="marquee-track">
           <div class="marquee-group">
@@ -1111,16 +1073,6 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
     if(!document.querySelector('.rv.in')) showAll();
   }, 2000);
 
-  /* ---------- Пауза на партньорската лента (WCAG 2.2.2) ---------- */
-  var mqBtn = document.getElementById('marqueePause');
-  if(mqBtn){
-    var mq = document.querySelector('.marquee');
-    mqBtn.addEventListener('click', function(){
-      var mqPaused = mq.classList.toggle('paused');
-      mqBtn.setAttribute('aria-pressed', mqPaused ? 'true' : 'false');
-      mqBtn.setAttribute('aria-label', mqPaused ? 'Пусни въртенето на партньорските лога' : 'Спри въртенето на партньорските лога');
-    });
-  }
 
   /* ---------- Newsletter (прототип) ---------- */
   var form = document.getElementById('nlForm');
