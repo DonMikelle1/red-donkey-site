@@ -21,8 +21,6 @@
 :root{
   --navy:#070F18;
   --ice:#FFFFFF;
-  --light:#FFFFFF;
-  --sand:#FFFFFF;
   --white:#FFFFFF;
   --ink:#16151A;
   --gray:#444444;
@@ -45,8 +43,6 @@
   --shadow-md:0 2px 6px rgba(38,56,72,.08),0 14px 28px rgba(38,56,72,.12);
   --shadow-lg:0 6px 14px rgba(38,56,72,.09),0 28px 56px rgba(38,56,72,.16);
   --shadow-hover:0 8px 18px rgba(38,56,72,.11),0 34px 64px rgba(38,56,72,.19);
-  --shadow-red:0 8px 20px rgba(38,56,72,.22);
-  --shadow-red-hover:0 12px 26px rgba(38,56,72,.30);
 }
 
 /* ---------- Reset / база ---------- */
@@ -112,11 +108,6 @@ time,.price,.ev-date{font-variant-numeric:tabular-nums}
   background:var(--kupi-dk);border-color:var(--kupi-dk);
   transform:translateY(-2px);box-shadow:var(--shadow-blue-hover);
 }
-.btn-ghost{
-  background:transparent;color:#fff;border:2px solid rgba(255,255,255,.85);
-  box-shadow:none;
-}
-.btn-ghost:hover{background:#fff;color:var(--navy);border-color:#fff;transform:translateY(-2px)}
 /* Тъмен ghost бутон върху светъл фон */
 .btn--ghost-dark{
   background:transparent;color:var(--ink);border:2px solid var(--ink);
@@ -355,19 +346,22 @@ time,.price,.ev-date{font-variant-numeric:tabular-nums}
    контрастът остава над WCAG AA (ревю находка). Активният афиш е ярък. */
 .evl:hover .evl-thumb{opacity:.5}
 .evl-row:hover .evl-thumb,.evl-row:focus-visible .evl-thumb{opacity:1}
-/* Мобилно: афиш вляво (span), име горе-дясно, мета долу-дясно */
+/* Мобилно: голям афиш вляво, име горе (без жанр), долу бутон под снимката + цена вдясно */
 @media(max-width:820px){
-  .evl-row{grid-template-columns:104px 1fr;gap:0 18px;
-    grid-template-areas:"thumb main" "thumb meta" "buy buy";align-items:start;padding:22px 4px}
+  .evl-row{grid-template-columns:140px minmax(0,1fr);gap:0 16px;
+    grid-template-areas:"thumb main" "thumb date" "buy price";align-items:start;padding:20px 2px}
   .evl-idx{display:none}
-  .evl-buy{grid-area:buy;justify-self:start;margin-top:14px}
-  .evl-thumb{width:104px;grid-area:thumb}
+  .evl-tag{display:none}
+  .evl-thumb{width:140px;grid-area:thumb;align-self:start}
   .evl-main{grid-area:main}
-  .evl-meta{grid-area:meta;text-align:left;align-items:flex-start;margin-top:12px;white-space:normal}
+  .evl-meta{display:contents}
+  .evl-meta .ev-date{grid-area:date;margin-top:10px;text-align:left;font-size:14px;color:var(--muted);white-space:normal}
+  .evl-buy{grid-area:buy;justify-self:stretch;align-self:center;margin-top:18px}
+  .evl-meta .price{grid-area:price;justify-self:start;align-self:center;margin-top:18px;font-size:22px;white-space:nowrap}
 }
 @media(max-width:480px){
-  .evl-row{grid-template-columns:80px 1fr}
-  .evl-thumb{width:80px}
+  .evl-row{grid-template-columns:116px minmax(0,1fr)}
+  .evl-thumb{width:116px}
 }
 
 /* ============================================================
@@ -397,7 +391,7 @@ time,.price,.ev-date{font-variant-numeric:tabular-nums}
 .nl-form input[type=email]{
   flex:1;min-width:0;min-height:52px;padding:12px 18px;
   font-family:var(--body);font-size:16px;color:var(--ink);
-  background:var(--white);border:1px solid #D9C2C4;border-right:none;
+  background:var(--white);border:1px solid var(--muted);border-right:none;
   border-radius:0;
 }
 .nl-form input[type=email]:focus-visible{outline:2px solid var(--navy);outline-offset:0}
@@ -639,7 +633,7 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
 }
 @media(max-width:560px){
   .nl-form{flex-direction:column;gap:12px}
-  .nl-form input[type=email]{border-right:1px solid #D9C2C4}
+  .nl-form input[type=email]{border-right:1px solid var(--muted)}
   .footer-grid{grid-template-columns:1fr}
   .events-head{margin-bottom:36px}
 }
@@ -733,7 +727,7 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
           <img src="assets/events/toni-dimitrova-2026.jpg" alt="Афиш: Тони Димитрова — Турне 2026" width="800" height="800" fetchpriority="high" draggable="false">
         </picture>
       </div>
-      <div class="cg-slide" data-name="Ку-Ку Бенд и Ивана: „Шампанско и сълзи“" data-date="СБ · 17.10.2026" data-href="https://kupibileti.bg" data-ext hidden>
+      <div class="cg-slide" data-name="Ку-Ку Бенд и Ивана: „Шампанско и сълзи“" data-date="СБ · 17.10.2026" data-href="https://www.kupibileti.bg/bg/about-event/2451" data-ext hidden>
         <picture>
           <source srcset="assets/events/ku-ku-ivana-2026.webp" type="image/webp">
           <img src="assets/events/ku-ku-ivana-2026.jpg" alt="Афиш: Ку-Ку Бенд и Ивана: „Шампанско и сълзи“" width="800" height="800" draggable="false">
@@ -745,13 +739,13 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
           <img src="assets/events/toni-storaro.jpg" alt="Афиш: Тони Стораро — Юбилеен концерт" width="800" height="800" draggable="false">
         </picture>
       </div>
-      <div class="cg-slide" data-name="Фики Стораро — Концерт 2027" data-date="2027 · дата: очаквайте" data-href="https://kupibileti.bg" data-ext hidden>
+      <div class="cg-slide" data-name="Фики Стораро — Концерт 2027" data-date="2027 · дата: очаквайте" data-href="https://www.kupibileti.bg/bg/about-event/2219" data-ext hidden>
         <picture>
           <source srcset="assets/events/fiki-storaro-2027.webp" type="image/webp">
           <img src="assets/events/fiki-storaro-2027.jpg" alt="Афиш: Фики Стораро — Концерт 2027" width="800" height="800" draggable="false">
         </picture>
       </div>
-      <div class="cg-slide" data-name="Софи Маринова — 30 години на сцена" data-date="НД · 05.12.2027" data-href="https://kupibileti.bg" data-ext hidden>
+      <div class="cg-slide" data-name="Софи Маринова — 30 години на сцена" data-date="НД · 05.12.2027" data-href="https://www.kupibileti.bg/bg/about-event/1499" data-ext hidden>
         <picture>
           <source srcset="assets/events/sofi-marinova-2027.webp" type="image/webp">
           <img src="assets/events/sofi-marinova-2027.jpg" alt="Афиш: Софи Маринова — 30 години на сцена" width="800" height="800" draggable="false">
@@ -778,7 +772,7 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
     <div class="events-head rv">
       <div>
         <span class="sec-kicker">Правим концертите незабравими от 2022 г.</span>
-        <h2 class="sec-title">Предстоящи<br>събития</h2>
+        <h2 class="sec-title">Предстоящи <br>събития</h2>
       </div>
       <a href="events.html" class="btn btn--ghost-dark">Всички събития</a>
     </div>
@@ -801,7 +795,7 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
         </span>
         <span class="btn evl-buy">Билети</span>
       </a>
-      <a class="evl-row rv" href="https://kupibileti.bg" target="_blank" rel="noopener" data-i="1">
+      <a class="evl-row rv" href="https://www.kupibileti.bg/bg/about-event/2451" target="_blank" rel="noopener" data-i="1">
         <span class="evl-idx" aria-hidden="true">02</span>
         <span class="evl-marker" aria-hidden="true"></span>
         <span class="evl-thumb" aria-hidden="true">
@@ -835,7 +829,7 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
         </span>
         <span class="btn evl-buy">Билети</span>
       </a>
-      <a class="evl-row rv" href="https://kupibileti.bg" target="_blank" rel="noopener" data-i="3">
+      <a class="evl-row rv" href="https://www.kupibileti.bg/bg/about-event/1499" target="_blank" rel="noopener" data-i="3">
         <span class="evl-idx" aria-hidden="true">04</span>
         <span class="evl-marker" aria-hidden="true"></span>
         <span class="evl-thumb" aria-hidden="true">
@@ -852,7 +846,7 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
         </span>
         <span class="btn evl-buy">Билети</span>
       </a>
-      <a class="evl-row rv" href="https://kupibileti.bg" target="_blank" rel="noopener" data-i="4">
+      <a class="evl-row rv" href="https://www.kupibileti.bg/bg/about-event/2219" target="_blank" rel="noopener" data-i="4">
         <span class="evl-idx" aria-hidden="true">05</span>
         <span class="evl-marker" aria-hidden="true"></span>
         <span class="evl-thumb" aria-hidden="true">

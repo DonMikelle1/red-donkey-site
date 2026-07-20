@@ -21,8 +21,6 @@
 :root{
   --navy:#070F18;
   --ice:#FFFFFF;
-  --light:#FFFFFF;
-  --sand:#FFFFFF;
   --white:#FFFFFF;
   --ink:#16151A;
   --gray:#444444;
@@ -44,8 +42,6 @@
   --shadow-md:0 2px 6px rgba(38,56,72,.08),0 14px 28px rgba(38,56,72,.12);
   --shadow-lg:0 6px 14px rgba(38,56,72,.09),0 28px 56px rgba(38,56,72,.16);
   --shadow-hover:0 8px 18px rgba(38,56,72,.11),0 34px 64px rgba(38,56,72,.19);
-  --shadow-red:0 8px 20px rgba(38,56,72,.22);
-  --shadow-red-hover:0 12px 26px rgba(38,56,72,.30);
 }
 
 /* ---------- Reset / база ---------- */
@@ -96,7 +92,6 @@ time{font-variant-numeric:tabular-nums}
 }
 .sec-kicker::before{content:"";width:34px;height:2px;background:var(--brand)}
 /* Дребен акцент върху бяло — по-тъмно синьо за контраст */
-.story .sec-kicker,.moments .sec-kicker,.cta-band .sec-kicker{color:var(--brand-dk)}
 
 /* Бутони — купибилетско синьо, остри ъгли, condensed */
 .btn{
@@ -246,7 +241,7 @@ time{font-variant-numeric:tabular-nums}
   color:var(--gray);transition:color .2s var(--ease);
 }
 .crumbs a:hover{color:var(--brand)}
-.crumbs li+li::before{content:"/";margin:0 8px;color:var(--hair)}
+.crumbs li+li::before{content:"/";margin:0 8px;color:var(--muted)}
 .crumbs [aria-current="page"]{color:var(--ink)}
 .ah{padding:44px 0 64px}
 .ah-grid{display:grid;grid-template-columns:minmax(0,400px) 1fr;gap:56px;align-items:start}
@@ -387,10 +382,6 @@ time{font-variant-numeric:tabular-nums}
 /* ============================================================
    Отзивчивост
    ============================================================ */
-@media(max-width:1024px){
-  .story-grid{grid-template-columns:1fr;gap:28px}
-  .facts-grid{grid-template-columns:repeat(3,1fr)}
-}
 @media(max-width:1000px){
   /* Центрираното лого + 6-те линка не се събират под ~1000px — бургерът идва по-рано */
   .nav-links{display:none}
@@ -398,10 +389,6 @@ time{font-variant-numeric:tabular-nums}
 }
 @media(max-width:820px){
   .page-header{padding:104px 0 34px}
-  .story,.facts,.moments{padding:64px 0}
-  .facts-grid{grid-template-columns:1fr}
-  .moments-grid{grid-template-columns:1fr}
-  .cta-band{padding:56px 0}
   .footer-grid{grid-template-columns:1fr 1fr;gap:36px}
 }
 @media(max-width:560px){
@@ -477,8 +464,8 @@ time{font-variant-numeric:tabular-nums}
   <div class="wrap">
     <nav aria-label="Пътечка">
       <ol>
-        <li><a href="artisti.html" class="is-section">Артисти</a></li>
-        <li><span>George Mazonakis</span></li>
+        <li><a href="artisti.html">Артисти</a></li>
+        <li><span aria-current="page">George Mazonakis</span></li>
       </ol>
     </nav>
   </div>

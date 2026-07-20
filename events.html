@@ -22,8 +22,6 @@
 :root{
   --navy:#070F18;
   --ice:#FFFFFF;
-  --light:#FFFFFF;
-  --sand:#FFFFFF;
   --white:#FFFFFF;
   --ink:#16151A;
   --gray:#444444;
@@ -45,8 +43,6 @@
   --shadow-md:0 2px 6px rgba(38,56,72,.08),0 14px 28px rgba(38,56,72,.12);
   --shadow-lg:0 6px 14px rgba(38,56,72,.09),0 28px 56px rgba(38,56,72,.16);
   --shadow-hover:0 8px 18px rgba(38,56,72,.11),0 34px 64px rgba(38,56,72,.19);
-  --shadow-red:0 8px 20px rgba(38,56,72,.22);
-  --shadow-red-hover:0 12px 26px rgba(38,56,72,.30);
 }
 
 /* ---------- Reset / база ---------- */
@@ -237,7 +233,7 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
 .filters{
   background:var(--white);
   padding:22px 0 26px;border-bottom:1px solid var(--hair);
-  position:sticky;top:76px;z-index:40;   /* лепват под навигацията */
+  position:sticky;top:60px;z-index:40;   /* лепват под навигацията */
 }
 .filters-row{
   display:flex;flex-wrap:wrap;align-items:center;gap:10px 28px;
@@ -638,6 +634,7 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
 <!-- 5. Афишна решетка -->
 <section class="events" aria-label="Събития с афишите">
   <div class="wrap">
+    <h2 class="visually-hidden">Всички събития</h2>
     <div class="events-grid" id="evGrid">
 
       <article class="ev-card filterable rv" data-genre="pop" data-years="2026 2027">
@@ -669,11 +666,11 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
         </div>
         <div class="ev-body">
           <p class="ev-date">СБ · 17.10.2026</p>
-          <h3 class="ev-name"><a href="https://kupibileti.bg" target="_blank" rel="noopener">Ку-Ку Бенд и Ивана: „Шампанско и сълзи“<span class="visually-hidden"> (отваря се в нов раздел)</span></a></h3>
+          <h3 class="ev-name"><a href="https://www.kupibileti.bg/bg/about-event/2451" target="_blank" rel="noopener">Ку-Ку Бенд и Ивана: „Шампанско и сълзи“<span class="visually-hidden"> (отваря се в нов раздел)</span></a></h3>
           <p class="ev-meta">Арена 8888 София</p>
           <div class="ev-foot">
             <p class="price"><small>от</small>45 евро</p>
-            <a href="https://kupibileti.bg" target="_blank" rel="noopener" class="btn">Билети<span class="visually-hidden"> — Ку-Ку Бенд и Ивана (отваря се в нов раздел)</span></a>
+            <a href="https://www.kupibileti.bg/bg/about-event/2451" target="_blank" rel="noopener" class="btn">Билети<span class="visually-hidden"> — Ку-Ку Бенд и Ивана (отваря се в нов раздел)</span></a>
           </div>
         </div>
       </article>
@@ -707,11 +704,11 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
         </div>
         <div class="ev-body">
           <p class="ev-date">2027 · дата: очаквайте</p>
-          <h3 class="ev-name"><a href="https://kupibileti.bg" target="_blank" rel="noopener">Фики Стораро — Концерт 2027<span class="visually-hidden"> (отваря се в нов раздел)</span></a></h3>
+          <h3 class="ev-name"><a href="https://www.kupibileti.bg/bg/about-event/2219" target="_blank" rel="noopener">Фики Стораро — Концерт 2027<span class="visually-hidden"> (отваря се в нов раздел)</span></a></h3>
           <p class="ev-meta">Арена 8888 София</p>
           <div class="ev-foot">
             <p class="price"><small>от</small>35 евро</p>
-            <a href="https://kupibileti.bg" target="_blank" rel="noopener" class="btn">Билети<span class="visually-hidden"> — Фики Стораро (отваря се в нов раздел)</span></a>
+            <a href="https://www.kupibileti.bg/bg/about-event/2219" target="_blank" rel="noopener" class="btn">Билети<span class="visually-hidden"> — Фики Стораро (отваря се в нов раздел)</span></a>
           </div>
         </div>
       </article>
@@ -726,11 +723,11 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
         </div>
         <div class="ev-body">
           <p class="ev-date">НД · 05.12.2027</p>
-          <h3 class="ev-name"><a href="https://kupibileti.bg" target="_blank" rel="noopener">Софи Маринова — 30 години на сцена<span class="visually-hidden"> (отваря се в нов раздел)</span></a></h3>
+          <h3 class="ev-name"><a href="https://www.kupibileti.bg/bg/about-event/1499" target="_blank" rel="noopener">Софи Маринова — 30 години на сцена<span class="visually-hidden"> (отваря се в нов раздел)</span></a></h3>
           <p class="ev-meta">Арена 8888 София</p>
           <div class="ev-foot">
             <p class="price"><small>от</small>30 евро</p>
-            <a href="https://kupibileti.bg" target="_blank" rel="noopener" class="btn">Билети<span class="visually-hidden"> — Софи Маринова (отваря се в нов раздел)</span></a>
+            <a href="https://www.kupibileti.bg/bg/about-event/1499" target="_blank" rel="noopener" class="btn">Билети<span class="visually-hidden"> — Софи Маринова (отваря се в нов раздел)</span></a>
           </div>
         </div>
       </article>
