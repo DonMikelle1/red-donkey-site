@@ -526,16 +526,6 @@ html:not(.js) .cg{-webkit-mask-image:none;mask-image:none}
 .cg-cursor.on{display:flex}
 .cg-cursor.flip svg{transform:scaleX(-1)}
 /* Точките — квадратни, върху долния ръб на афиша */
-.cg-dots{
-  position:absolute;left:50%;bottom:14px;transform:translateX(-50%);
-  display:flex;gap:8px;z-index:2;pointer-events:none;
-}
-.cg-dots i{
-  width:8px;height:8px;background:rgba(255,255,255,.6);
-  border:1px solid rgba(22,21,26,.55);
-  transition:background .6s cubic-bezier(.42,0,.58,1),border-color .6s cubic-bezier(.42,0,.58,1);
-}
-.cg-dots i.on{background:var(--brand);border-color:var(--brand)}
 
 /* Реални бутони назад/напред — клавиатура, тъч и екранни четци (старите
    <button> карти изчезнаха). На фина мишка се разчита на курсора-стрелка:
@@ -566,7 +556,7 @@ html:not(.js) .ring-stage{height:auto;overflow-x:auto;padding:0 24px;justify-con
 html:not(.js) .cg{display:flex;gap:14px;width:auto!important;height:auto!important;box-shadow:none;overflow:visible}
 html:not(.js) .cg-slide{position:static;width:220px;height:220px;flex:none;transform:none}
 html:not(.js) .cg-slide[hidden]{display:block}
-html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:none}
+html:not(.js) .cg-cursor,html:not(.js) .cg-nav{display:none}
 
 /* ============================================================
    Scroll-driven зуум на афишите — картината се „наглася" от 1.07
@@ -754,7 +744,6 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
       <div class="cg-cursor" id="cgCursor" aria-hidden="true">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>
       </div>
-      <div class="cg-dots" id="cgDots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
     </div>
     <button class="cg-nav cg-nav--prev" id="cgPrev" type="button" aria-label="Предишен афиш">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 6 9 12 15 18"/></svg>
@@ -1137,7 +1126,6 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
     var cgEl = document.getElementById('cursorGallery');
     var cgSlides = Array.prototype.slice.call(cgEl.querySelectorAll('.cg-slide'));
     var cgCursor = document.getElementById('cgCursor');
-    var cgDots = Array.prototype.slice.call(document.querySelectorAll('#cgDots i'));
     var cgStatus = document.getElementById('cgStatus');
     var CG_N = cgSlides.length, CG_DUR = 600;
     var cgIdx = 0, cgSliding = false, cgW = 320, cgStep = 230, cgFirst = true;
@@ -1180,7 +1168,6 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-dots,html:not(.js) .cg-nav{display:no
     }
 
     function cgPaint(){
-      cgDots.forEach(function(d, i){ d.classList.toggle('on', i === cgIdx); });
       if(cgFirst){ cgFirst = false; return; }   // без обявяване при зареждане
       var img = cgSlides[cgIdx].querySelector('img');
       if(cgStatus && img) cgStatus.textContent = 'Афиш ' + (cgIdx + 1) + ' от ' + CG_N + ': ' + img.alt;
