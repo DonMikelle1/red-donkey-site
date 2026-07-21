@@ -20,14 +20,14 @@
 
 /* ---------- Токени ---------- */
 :root{
-  --navy:#070F18;
+  --navy:#0A0A0C;
   --ice:#FFFFFF;
   --white:#FFFFFF;
   --ink:#16151A;
   --gray:#444444;
   --muted:#5C6975;
-  --brand:#153d8a;
-  --brand-dk:#0F2D66;
+  --brand:#16151A;
+  --brand-dk:#0C0B0E;
   --kupi:#153d8a;         /* купибилетско синьо — плътните бутони */
   --kupi-dk:#0F2D66;
   --shadow-blue:0 8px 20px rgba(21,61,138,.24);
@@ -99,14 +99,14 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:10px;
   min-height:48px;padding:13px 30px;
-  background:var(--kupi);color:#fff;
+  background:var(--ink);color:#fff;
   font-family:var(--cond);font-weight:700;text-transform:uppercase;
   letter-spacing:.08em;font-size:15px;
-  border-radius:0;border:2px solid var(--kupi);
-  box-shadow:var(--shadow-blue);
+  border-radius:12px;border:2px solid var(--ink);
+  box-shadow:var(--shadow-md);
   transition:background .25s var(--ease),border-color .25s var(--ease),transform .25s var(--ease),box-shadow .25s var(--ease);
 }
-.btn:hover{background:var(--kupi-dk);border-color:var(--kupi-dk);transform:translateY(-2px);box-shadow:var(--shadow-blue-hover)}
+.btn:hover{background:#000;border-color:#000;transform:translateY(-2px);box-shadow:var(--shadow-hover)}
 /* Тъмен ghost бутон върху светъл фон */
 .btn--ghost-dark{
   background:transparent;color:var(--ink);border:2px solid var(--ink);
@@ -114,6 +114,8 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
 }
 .btn--ghost-dark:hover{background:var(--ink);border-color:var(--ink);color:#fff;transform:translateY(-2px);box-shadow:none}
 .btn svg{flex:none}
+.btn.evl-buy,.btn.btn--ticket{background:var(--kupi);border-color:var(--kupi);color:#fff;box-shadow:var(--shadow-blue)}
+.btn.evl-buy:hover,.btn.btn--ticket:hover{background:var(--kupi-dk);border-color:var(--kupi-dk);box-shadow:var(--shadow-blue-hover)}
 
 
 /* ============================================================
@@ -144,11 +146,14 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
    ============================================================ */
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:50;
-  background:var(--warm);
-  border-bottom:1px solid var(--hair);
+  background:rgba(255,255,255,.62);
+  -webkit-backdrop-filter:blur(16px) saturate(180%);
+  backdrop-filter:blur(16px) saturate(180%);
+  border-bottom:1px solid rgba(22,21,26,.10);
   transition:box-shadow .3s var(--ease);
 }
 .nav.scrolled{
+  background:rgba(255,255,255,.8);
   box-shadow:0 4px 10px rgba(38,56,72,.06),0 12px 32px rgba(38,56,72,.10);
 }
 .nav-inner{
@@ -195,7 +200,9 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
 .mobile-menu{
   display:none;
   position:fixed;top:0;left:0;right:0;bottom:0;z-index:55;
-  background:var(--warm);
+  background:rgba(255,255,255,.82);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  backdrop-filter:blur(24px) saturate(180%);
   padding:100px 32px 40px;
 }
 .mobile-menu.open{display:block;animation:menuIn .3s var(--ease)}
@@ -212,6 +219,12 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
 .menu-close{
   position:absolute;top:16px;right:16px;width:48px;height:48px;
   display:flex;align-items:center;justify-content:center;color:var(--ink);
+}
+.burger,.menu-close{
+  border-radius:50%;background:rgba(255,255,255,.5);
+  -webkit-backdrop-filter:blur(10px) saturate(160%);
+  backdrop-filter:blur(10px) saturate(160%);
+  border:1px solid rgba(22,21,26,.12);box-shadow:0 2px 8px rgba(22,21,26,.08);
 }
 
 /* ============================================================
@@ -354,7 +367,7 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
 .ev-body{padding:24px 24px 28px;display:flex;flex-direction:column;flex:1}
 .ev-date{
   font-family:var(--cond);font-weight:700;text-transform:uppercase;
-  letter-spacing:.12em;font-size:13px;color:var(--brand);
+  font-size:13px;color:var(--brand);
 }
 .ev-name{
   font-family:var(--cond);font-weight:900;text-transform:uppercase;
@@ -603,7 +616,6 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
 <!-- 2. Page-header — светъл -->
 <section class="page-header">
   <div class="wrap">
-    <span class="sec-kicker">Календар</span>
     <h1 class="sec-title">Всички събития</h1>
     <p class="page-sub"><strong>5 събития</strong> · сезони 2026 – 2027</p>
   </div>
@@ -651,7 +663,7 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
           <p class="ev-meta">Пловдив · Бургас · Варна · Русе · София (НДК)</p>
           <div class="ev-foot">
             <p class="price"><small>от</small>25 евро</p>
-            <a href="tour-toni-dimitrova.html" class="btn">Билети<span class="visually-hidden"> — Тони Димитрова, Турне 2026</span></a>
+            <a href="tour-toni-dimitrova.html" class="btn btn--ticket">Купи билети<span class="visually-hidden"> — Тони Димитрова, Турне 2026</span></a>
           </div>
         </div>
       </article>
@@ -670,7 +682,7 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
           <p class="ev-meta">Арена 8888 София</p>
           <div class="ev-foot">
             <p class="price"><small>от</small>45 евро</p>
-            <a href="https://www.kupibileti.bg/bg/about-event/2451" target="_blank" rel="noopener" class="btn">Билети<span class="visually-hidden"> — Ку-Ку Бенд и Ивана (отваря се в нов раздел)</span></a>
+            <a href="https://www.kupibileti.bg/bg/about-event/2451" target="_blank" rel="noopener" class="btn btn--ticket">Купи билети<span class="visually-hidden"> — Ку-Ку Бенд и Ивана (отваря се в нов раздел)</span></a>
           </div>
         </div>
       </article>
@@ -689,7 +701,7 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
           <p class="ev-meta">Арена 8888 София</p>
           <div class="ev-foot">
             <p class="price"><small>от</small>40 евро</p>
-            <a href="event-toni-storaro.html" class="btn">Билети<span class="visually-hidden"> — Тони Стораро, Юбилеен концерт</span></a>
+            <a href="event-toni-storaro.html" class="btn btn--ticket">Купи билети<span class="visually-hidden"> — Тони Стораро, Юбилеен концерт</span></a>
           </div>
         </div>
       </article>
@@ -708,7 +720,7 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
           <p class="ev-meta">Арена 8888 София</p>
           <div class="ev-foot">
             <p class="price"><small>от</small>35 евро</p>
-            <a href="https://www.kupibileti.bg/bg/about-event/2219" target="_blank" rel="noopener" class="btn">Билети<span class="visually-hidden"> — Фики Стораро (отваря се в нов раздел)</span></a>
+            <a href="https://www.kupibileti.bg/bg/about-event/2219" target="_blank" rel="noopener" class="btn btn--ticket">Купи билети<span class="visually-hidden"> — Фики Стораро (отваря се в нов раздел)</span></a>
           </div>
         </div>
       </article>
@@ -727,7 +739,7 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
           <p class="ev-meta">Арена 8888 София</p>
           <div class="ev-foot">
             <p class="price"><small>от</small>30 евро</p>
-            <a href="https://www.kupibileti.bg/bg/about-event/1499" target="_blank" rel="noopener" class="btn">Билети<span class="visually-hidden"> — Софи Маринова (отваря се в нов раздел)</span></a>
+            <a href="https://www.kupibileti.bg/bg/about-event/1499" target="_blank" rel="noopener" class="btn btn--ticket">Купи билети<span class="visually-hidden"> — Софи Маринова (отваря се в нов раздел)</span></a>
           </div>
         </div>
       </article>
@@ -745,7 +757,6 @@ time,.price,.ev-date,.pl-date{font-variant-numeric:tabular-nums}
   <div class="wrap">
     <div class="cta-inner rv">
       <div>
-        <span class="sec-kicker">За бизнеса и частни клиенти</span>
         <h2 class="sec-title">Организираш събитие?</h2>
         <p>Сватби, корпоративни партита, частни тържества — Red Donkey Backstage Management поема всичко: техника, сцена, кетъринг и артисти.</p>
       </div>

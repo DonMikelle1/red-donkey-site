@@ -19,14 +19,14 @@
 
 /* ---------- Токени ---------- */
 :root{
-  --navy:#070F18;
+  --navy:#0A0A0C;
   --ice:#FFFFFF;
   --white:#FFFFFF;
   --ink:#16151A;
   --gray:#444444;
   --muted:#5C6975;
-  --brand:#153d8a;
-  --brand-dk:#0F2D66;
+  --brand:#16151A;
+  --brand-dk:#0C0B0E;
   --kupi:#153d8a;         /* купибилетско синьо — плътните бутони */
   --kupi-dk:#0F2D66;
   --shadow-blue:0 8px 20px rgba(21,61,138,.24);
@@ -97,14 +97,14 @@ time{font-variant-numeric:tabular-nums}
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:10px;
   min-height:48px;padding:13px 30px;
-  background:var(--kupi);color:#fff;
+  background:var(--ink);color:#fff;
   font-family:var(--cond);font-weight:700;text-transform:uppercase;
   letter-spacing:.08em;font-size:15px;
-  border-radius:0;border:2px solid var(--kupi);
-  box-shadow:var(--shadow-blue);
+  border-radius:12px;border:2px solid var(--ink);
+  box-shadow:var(--shadow-md);
   transition:background .25s var(--ease),border-color .25s var(--ease),transform .25s var(--ease),box-shadow .25s var(--ease);
 }
-.btn:hover{background:var(--kupi-dk);border-color:var(--kupi-dk);transform:translateY(-2px);box-shadow:var(--shadow-blue-hover)}
+.btn:hover{background:#000;border-color:#000;transform:translateY(-2px);box-shadow:var(--shadow-hover)}
 /* Тъмен ghost бутон върху светъл фон */
 .btn--ghost-dark{
   background:transparent;color:var(--ink);border:2px solid var(--ink);
@@ -112,6 +112,8 @@ time{font-variant-numeric:tabular-nums}
 }
 .btn--ghost-dark:hover{background:var(--ink);border-color:var(--ink);color:#fff;transform:translateY(-2px);box-shadow:none}
 .btn svg{flex:none}
+.btn.evl-buy,.btn.btn--ticket{background:var(--kupi);border-color:var(--kupi);color:#fff;box-shadow:var(--shadow-blue)}
+.btn.evl-buy:hover,.btn.btn--ticket:hover{background:var(--kupi-dk);border-color:var(--kupi-dk);box-shadow:var(--shadow-blue-hover)}
 
 
 /* ============================================================
@@ -142,11 +144,14 @@ time{font-variant-numeric:tabular-nums}
    ============================================================ */
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:50;
-  background:var(--warm);
-  border-bottom:1px solid var(--hair);
+  background:rgba(255,255,255,.62);
+  -webkit-backdrop-filter:blur(16px) saturate(180%);
+  backdrop-filter:blur(16px) saturate(180%);
+  border-bottom:1px solid rgba(22,21,26,.10);
   transition:box-shadow .3s var(--ease);
 }
 .nav.scrolled{
+  background:rgba(255,255,255,.8);
   box-shadow:0 4px 10px rgba(38,56,72,.06),0 12px 32px rgba(38,56,72,.10);
 }
 .nav-inner{
@@ -195,7 +200,9 @@ time{font-variant-numeric:tabular-nums}
 .mobile-menu{
   display:none;
   position:fixed;top:0;left:0;right:0;bottom:0;z-index:55;
-  background:var(--warm);
+  background:rgba(255,255,255,.82);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  backdrop-filter:blur(24px) saturate(180%);
   padding:100px 32px 40px;
 }
 .mobile-menu.open{display:block;animation:menuIn .3s var(--ease)}
@@ -213,6 +220,12 @@ time{font-variant-numeric:tabular-nums}
 .menu-close{
   position:absolute;top:16px;right:16px;width:48px;height:48px;
   display:flex;align-items:center;justify-content:center;color:var(--ink);
+}
+.burger,.menu-close{
+  border-radius:50%;background:rgba(255,255,255,.5);
+  -webkit-backdrop-filter:blur(10px) saturate(160%);
+  backdrop-filter:blur(10px) saturate(160%);
+  border:1px solid rgba(22,21,26,.12);box-shadow:0 2px 8px rgba(22,21,26,.08);
 }
 
 /* ============================================================
@@ -481,7 +494,6 @@ time{font-variant-numeric:tabular-nums}
         <picture><source srcset="assets/artists/dragomir-dimitrov.webp" type="image/webp"><img src="assets/artists/dragomir-dimitrov.jpg" alt="Драгомир Димитров" width="600" height="900" fetchpriority="high"></picture>
       </div>
       <div class="ah-info rv">
-        <span class="sec-kicker">Поп · България</span>
         <h1 class="ah-name">Драгомир Димитров</h1>
         <p class="ah-bio">Драгомир Димитров е талантлив български поп изпълнител, познат като част от легендарната вокална група Тоника СВ. С години опит на сцената, той продължава да впечатлява публиката със своя глас и артистизъм.</p>
         <div class="socials ah-socials">
@@ -499,7 +511,6 @@ time{font-variant-numeric:tabular-nums}
 <section class="more-artists" aria-label="Още артисти">
   <div class="wrap">
     <div class="ma-head rv">
-      <span class="sec-kicker">Открий още</span>
       <h2 class="sec-title" style="font-size:clamp(30px,4vw,48px)">Още артисти</h2>
     </div>
     <div class="ma-grid">

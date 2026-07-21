@@ -19,14 +19,14 @@
 
 /* ---------- Токени ---------- */
 :root{
-  --navy:#070F18;
+  --navy:#0A0A0C;
   --ice:#FFFFFF;
   --white:#FFFFFF;
   --ink:#16151A;
   --gray:#444444;
   --muted:#5C6975;
-  --brand:#153d8a;
-  --brand-dk:#0F2D66;
+  --brand:#16151A;
+  --brand-dk:#0C0B0E;
   --kupi:#153d8a;         /* купибилетско синьо — плътните бутони */
   --kupi-dk:#0F2D66;
   --shadow-blue:0 8px 20px rgba(21,61,138,.24);
@@ -98,19 +98,21 @@ time,.step-num{font-variant-numeric:tabular-nums}
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:10px;
   min-height:48px;padding:13px 30px;
-  background:var(--kupi);color:#fff;
+  background:var(--ink);color:#fff;
   font-family:var(--cond);font-weight:700;text-transform:uppercase;
   letter-spacing:.08em;font-size:15px;
-  border-radius:0;border:2px solid var(--kupi);
-  box-shadow:var(--shadow-blue);
+  border-radius:12px;border:2px solid var(--ink);
+  box-shadow:var(--shadow-md);
   transition:background .25s var(--ease),border-color .25s var(--ease),
              transform .25s var(--ease),box-shadow .25s var(--ease);
 }
 .btn:hover{
-  background:var(--kupi-dk);border-color:var(--kupi-dk);
-  transform:translateY(-2px);box-shadow:var(--shadow-blue-hover);
+  background:#000;border-color:#000;
+  transform:translateY(-2px);box-shadow:var(--shadow-hover);
 }
 .btn svg{flex:none}
+.btn.evl-buy,.btn.btn--ticket{background:var(--kupi);border-color:var(--kupi);color:#fff;box-shadow:var(--shadow-blue)}
+.btn.evl-buy:hover,.btn.btn--ticket:hover{background:var(--kupi-dk);border-color:var(--kupi-dk);box-shadow:var(--shadow-blue-hover)}
 
 
 /* ============================================================
@@ -141,11 +143,14 @@ time,.step-num{font-variant-numeric:tabular-nums}
    ============================================================ */
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:50;
-  background:var(--warm);
-  border-bottom:1px solid var(--hair);
+  background:rgba(255,255,255,.62);
+  -webkit-backdrop-filter:blur(16px) saturate(180%);
+  backdrop-filter:blur(16px) saturate(180%);
+  border-bottom:1px solid rgba(22,21,26,.10);
   transition:box-shadow .3s var(--ease);
 }
 .nav.scrolled{
+  background:rgba(255,255,255,.8);
   box-shadow:0 4px 10px rgba(38,56,72,.06),0 12px 32px rgba(38,56,72,.10);
 }
 .nav-inner{
@@ -192,7 +197,9 @@ time,.step-num{font-variant-numeric:tabular-nums}
 .mobile-menu{
   display:none;
   position:fixed;top:0;left:0;right:0;bottom:0;z-index:55;
-  background:var(--warm);
+  background:rgba(255,255,255,.82);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  backdrop-filter:blur(24px) saturate(180%);
   padding:100px 32px 40px;
 }
 .mobile-menu.open{display:block;animation:menuIn .3s var(--ease)}
@@ -209,6 +216,12 @@ time,.step-num{font-variant-numeric:tabular-nums}
 .menu-close{
   position:absolute;top:16px;right:16px;width:48px;height:48px;
   display:flex;align-items:center;justify-content:center;color:var(--ink);
+}
+.burger,.menu-close{
+  border-radius:50%;background:rgba(255,255,255,.5);
+  -webkit-backdrop-filter:blur(10px) saturate(160%);
+  backdrop-filter:blur(10px) saturate(160%);
+  border:1px solid rgba(22,21,26,.12);box-shadow:0 2px 8px rgba(22,21,26,.08);
 }
 
 /* ============================================================
@@ -267,7 +280,7 @@ time,.step-num{font-variant-numeric:tabular-nums}
 .srv-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
 .srv-icon{
   width:56px;height:56px;display:flex;align-items:center;justify-content:center;
-  background:rgba(21,61,138,.08);color:var(--brand);margin-bottom:20px;
+  background:rgba(22,21,26,.06);color:var(--brand);margin-bottom:20px;
 }
 .srv-card h3{
   font-family:var(--cond);font-weight:900;text-transform:uppercase;
@@ -336,12 +349,12 @@ time,.step-num{font-variant-numeric:tabular-nums}
 }
 .field input::placeholder,.field textarea::placeholder{color:var(--muted)}
 .field input[aria-invalid="true"],.field select[aria-invalid="true"],.field textarea[aria-invalid="true"]{
-  border-color:#0F2D66;border-width:2px;
+  border-color:#16151A;border-width:2px;
 }
 /* Грешка под полето — видим текст + role="alert" */
 .field-error{
   display:none;margin-top:8px;
-  color:#0F2D66;font-weight:600;font-size:14px;
+  color:#16151A;font-weight:600;font-size:14px;
 }
 .field-error.show{display:block}
 .inq-form .btn{justify-self:start;min-width:220px}
@@ -584,7 +597,6 @@ time,.step-num{font-variant-numeric:tabular-nums}
 <section class="services">
   <div class="wrap">
     <div class="rv">
-      <span class="sec-kicker">Какво правим</span>
       <h2 class="sec-title">Услуги</h2>
     </div>
     <div class="srv-grid">
@@ -651,7 +663,6 @@ time,.step-num{font-variant-numeric:tabular-nums}
 <section class="steps">
   <div class="wrap">
     <div class="rv">
-      <span class="sec-kicker">Процесът</span>
       <h2 class="sec-title">Как работим</h2>
     </div>
     <div class="steps-grid">
@@ -683,7 +694,6 @@ time,.step-num{font-variant-numeric:tabular-nums}
 <section class="inquiry" id="zapitvane">
   <div class="wrap">
     <div class="inq-inner rv">
-      <span class="sec-kicker">Заяви оферта</span>
       <h2 class="sec-title">Запитване</h2>
       <p>Разкажете ни за вашето събитие — ще се върнем с концепция и оферта.</p>
       <p class="req-note">Полетата, отбелязани със *, са задължителни.</p>
@@ -748,7 +758,6 @@ time,.step-num{font-variant-numeric:tabular-nums}
 <section class="trust">
   <div class="wrap">
     <div class="rv">
-      <span class="sec-kicker">Опитът зад кулисите</span>
       <h2 class="sec-title">Правим концертите незабравими от 2022 г.</h2>
     </div>
     <div class="trust-grid">
