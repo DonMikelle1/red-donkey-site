@@ -347,8 +347,15 @@ time,.price,.ev-date{font-variant-numeric:tabular-nums}
   filter:drop-shadow(0 10px 14px rgba(22,21,26,.16));
 }
 .hero-donkey .donkey-frame{display:block;width:100%;height:auto}
-.hero-donkey .donkey-frame--blink{position:absolute;inset:0;opacity:0;animation:donkeyBlink 5.4s infinite}
-@keyframes donkeyBlink{0%,90%{opacity:0}93%,97%{opacity:1}100%{opacity:0}}
+.hero-donkey .donkey-frame--blink{position:absolute;inset:0;opacity:0;animation:donkeyBlink 1.5s infinite}
+/* Двойно мигане на всеки 1.5s: отворени очи, после две бързи мигвания */
+@keyframes donkeyBlink{
+  0%,76%{opacity:0}
+  80%,85%{opacity:1}   /* мигване 1 */
+  89%{opacity:0}       /* отваря за миг */
+  93%,98%{opacity:1}   /* мигване 2 */
+  100%{opacity:0}
+}
 .hero-ring__cta--below{margin-top:22px;margin-bottom:30px;position:relative;z-index:2}
 @media(max-width:820px){ .spotlight{width:132px;top:66px} .hero-donkey{width:120px} }
 @media(max-width:520px){ .spotlight{width:98px;top:58px} }
