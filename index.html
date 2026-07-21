@@ -640,76 +640,74 @@ time,.price,.ev-date{font-variant-numeric:tabular-nums}
   outline:none;
 }
 
-/* ---------- Cursor Gallery (порт на „Cursor Image Gallery") ----------
-   Активният афиш е голям в центъра, а съседните надничат отстрани
-   (смалени и затъмнени) — лентата запълва цялата ширина на сцената.
-   Лява/дясна половина на лентата: курсорът става квадратна стрелка,
-   кликът плъзга (600ms easeInOut, като компонента). Галерията е
-   циклична; без autoplay — движение само от потребителя. */
+/* ---------- Банер-галерия (порт на Framer normal-carousel): една снимка край-до-край ----------
+   Лента (.cg-track) от всички афиши, местена хоризонтално с ПРУЖИННА (spring) анимация
+   (stiffness 300, damping 30). Целият афиш се вижда (contain) + замъглен фон отстрани.
+   Видими бутони ‹ › (деактивирани в краищата — БЕЗ цикъл); прогрес-точки „хапче" (кликаеми). */
 .cg{
-  position:relative;overflow:hidden;border-radius:0;width:100%;   /* остри ъгли */
-  touch-action:manipulation;user-select:none;
-  /* Мека маска по ръбовете: стърчащите ръбове/бордюри на съседните
-     афиши (opacity 0, rel=±2) избледняват до прозрачно, за да не се
-     появяват линии отстрани при смяна на афиша. */
-  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 12%,#000 88%,transparent 100%);
-  mask-image:linear-gradient(90deg,transparent 0,#000 12%,#000 88%,transparent 100%);
+  position:relative;overflow:hidden;width:100%;   /* от ляв до десен край на страницата */
+  height:100%;align-self:stretch;                 /* височината идва от сцената (CSS, без JS timing) */
+  flex:none;border-radius:20px;background:#111;
+  touch-action:pan-y;user-select:none;
 }
-/* Без JS (плосък ред) маската е излишна — маха се */
-html:not(.js) .cg{-webkit-mask-image:none;mask-image:none}
-.cg.has-side{cursor:none}          /* стрелката-курсор замества системния */
+.cg-track{display:flex;height:100%;will-change:transform}
 .cg-slide{
-  position:absolute;left:50%;top:50%;
-  transform:translate(-50%,-50%);
-  transition:transform .6s cubic-bezier(.42,0,.58,1),opacity .6s cubic-bezier(.42,0,.58,1);
-  will-change:transform,opacity;
-  border:1px solid var(--hair);
-  background:#fff;
+  position:relative;flex:0 0 100%;height:100%;overflow:hidden;background:#111;
 }
-.cg-slide[hidden]{display:none}
-.cg-slide img{width:100%;height:100%;object-fit:cover;user-select:none}
-/* Квадратният курсор-стрелка (кръглият от компонента, но в езика на сайта) */
-.cg-cursor{
-  position:absolute;z-index:3;width:56px;height:56px;
-  transform:translate(-50%,-50%);
-  display:none;align-items:center;justify-content:center;
-  background:rgba(255,255,255,.92);border:1px solid var(--ink);
-  box-shadow:var(--shadow-sm);pointer-events:none;
+/* Замъглено уголемено копие на същия афиш пълни ширината (без празно отстрани) */
+.cg-slide::before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background:var(--poster) center/cover no-repeat;
+  filter:blur(26px) brightness(.52) saturate(1.15);
+  transform:scale(1.18);
 }
-.cg-cursor.on{display:flex}
-.cg-cursor.flip svg{transform:scaleX(-1)}
-/* Точките — квадратни, върху долния ръб на афиша */
+/* Целият квадратен афиш се вижда (contain), центриран върху замъгления фон */
+.cg-slide picture{position:absolute;inset:0;z-index:1;display:block}
+.cg-slide img{width:100%;height:100%;object-fit:contain;object-position:center;user-select:none;display:block}
+/* Прогрес-точки „хапче" долу — кликаеми; активната е удължена */
+.cg-dots{
+  position:absolute;left:50%;bottom:16px;transform:translateX(-50%);
+  z-index:3;display:flex;gap:8px;
+}
+.cg-dots button{
+  width:8px;height:8px;border:none;padding:0;border-radius:9999px;cursor:pointer;
+  background:rgba(255,255,255,.5);box-shadow:0 1px 3px rgba(0,0,0,.45);
+  transition:width .3s var(--ease),background .3s var(--ease);
+}
+.cg-dots button.on{width:32px;background:#fff}
 
-/* Реални бутони назад/напред — клавиатура, тъч и екранни четци (старите
-   <button> карти изчезнаха). На фина мишка се разчита на курсора-стрелка:
-   бутоните са скрити, но изникват при клавиатурен фокус (достъпност). */
+/* Видими кръгли бутони ‹ › — бели, hover уголемяване; деактивирани в краищата (без цикъл) */
 .cg-nav{
   position:absolute;top:50%;z-index:4;transform:translateY(-50%);
-  width:40px;height:40px;display:flex;align-items:center;justify-content:center;
+  width:48px;height:48px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
   background:rgba(255,255,255,.92);border:1px solid var(--ink);color:var(--ink);
-  box-shadow:var(--shadow-sm);
-  transition:background .2s var(--ease),color .2s var(--ease),opacity .2s var(--ease);
+  box-shadow:var(--shadow-md);
+  transition:transform .2s var(--ease),background .2s var(--ease),color .2s var(--ease),opacity .2s var(--ease);
 }
-.cg-nav:hover{background:var(--ink);color:#fff}
-.cg-nav svg{width:18px;height:18px}
-.cg-nav--prev{left:12px}
-.cg-nav--next{right:12px}
-@media(hover:hover) and (pointer:fine){
-  .cg-nav{opacity:0;pointer-events:none}
-  /* На фина мишка бутонът е с pointer-events:none — фокус идва само от
-     клавиатура, затова и :focus (не само :focus-visible) е безопасен да го покаже */
-  .cg-nav:focus,.cg-nav:focus-visible{opacity:1;pointer-events:auto}
-}
+.cg-nav:hover:not(:disabled){background:var(--ink);color:#fff;transform:translateY(-50%) scale(1.1)}
+.cg-nav:active:not(:disabled){transform:translateY(-50%) scale(.96)}
+.cg-nav:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
+.cg-nav svg{width:22px;height:22px}
+.cg-nav--prev{left:18px}
+.cg-nav--next{right:18px}
 @media(max-width:820px){
+  .cg-nav{width:42px;height:42px}
+  .cg-nav svg{width:19px;height:19px}
+  .cg-nav--prev{left:10px}
+  .cg-nav--next{right:10px}
   .hero-ring{padding-top:88px}
   .hero-ring .ring-stage{height:330px;margin-top:180px}
 }
 /* Без JS: галерията става обикновен хоризонтален ред от афиши */
 html:not(.js) .ring-stage{height:auto;overflow-x:auto;padding:0 24px;justify-content:flex-start}
-html:not(.js) .cg{display:flex;gap:14px;width:auto!important;height:auto!important;box-shadow:none;overflow:visible}
-html:not(.js) .cg-slide{position:static;width:220px;height:220px;flex:none;transform:none}
-html:not(.js) .cg-slide[hidden]{display:block}
-html:not(.js) .cg-cursor,html:not(.js) .cg-nav{display:none}
+html:not(.js) .cg{display:flex;gap:14px;width:auto!important;height:auto!important;box-shadow:none;overflow:visible;border:0;background:none;border-radius:0}
+html:not(.js) .cg-track{display:contents}
+html:not(.js) .cg-slide{position:static;width:220px;height:220px;flex:none;transform:none;border:1px solid var(--hair)}
+html:not(.js) .cg-slide::before{display:none}
+html:not(.js) .cg-slide picture{position:static}
+html:not(.js) .cg-slide img{object-fit:cover}
+html:not(.js) .cg-nav{display:none}
 
 /* ============================================================
    Scroll-driven зуум на афишите — картината се „наглася" от 1.07
@@ -868,39 +866,39 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-nav{display:none}
   <div class="ring-stage" id="ringStage" role="group"
        aria-roledescription="галерия" aria-label="Афиши на предстоящи събития — бутоните назад/напред сменят афиша">
     <div class="cg" id="cursorGallery">
-      <div class="cg-slide" data-name="Тони Димитрова — Турне 2026" data-date="Август 2026 – Януари 2027" data-href="tour-toni-dimitrova.html">
+      <div class="cg-track" id="cgTrack">
+      <div class="cg-slide" style="--poster:url('assets/events/toni-dimitrova-2026.webp')" data-name="Тони Димитрова — Турне 2026" data-date="Август 2026 – Януари 2027" data-href="tour-toni-dimitrova.html">
         <picture>
           <source srcset="assets/events/toni-dimitrova-2026.webp" type="image/webp">
           <img src="assets/events/toni-dimitrova-2026.jpg" alt="Афиш: Тони Димитрова — Турне 2026" width="800" height="800" fetchpriority="high" draggable="false">
         </picture>
       </div>
-      <div class="cg-slide" data-name="Ку-Ку Бенд и Ивана: „Шампанско и сълзи“" data-date="СБ · 17.10.2026" data-href="https://www.kupibileti.bg/bg/about-event/2451" data-ext hidden>
+      <div class="cg-slide" style="--poster:url('assets/events/ku-ku-ivana-2026.webp')" data-name="Ку-Ку Бенд и Ивана: „Шампанско и сълзи“" data-date="СБ · 17.10.2026" data-href="https://www.kupibileti.bg/bg/about-event/2451" data-ext>
         <picture>
           <source srcset="assets/events/ku-ku-ivana-2026.webp" type="image/webp">
           <img src="assets/events/ku-ku-ivana-2026.jpg" alt="Афиш: Ку-Ку Бенд и Ивана: „Шампанско и сълзи“" width="800" height="800" draggable="false">
         </picture>
       </div>
-      <div class="cg-slide" data-name="Тони Стораро — Юбилеен концерт" data-date="ПТ · 13.11.2026" data-href="event-toni-storaro.html" hidden>
+      <div class="cg-slide" style="--poster:url('assets/events/toni-storaro.webp')" data-name="Тони Стораро — Юбилеен концерт" data-date="ПТ · 13.11.2026" data-href="event-toni-storaro.html">
         <picture>
           <source srcset="assets/events/toni-storaro.webp" type="image/webp">
           <img src="assets/events/toni-storaro.jpg" alt="Афиш: Тони Стораро — Юбилеен концерт" width="800" height="800" draggable="false">
         </picture>
       </div>
-      <div class="cg-slide" data-name="Фики Стораро — Концерт 2027" data-date="2027 · дата: очаквайте" data-href="https://www.kupibileti.bg/bg/about-event/2219" data-ext hidden>
+      <div class="cg-slide" style="--poster:url('assets/events/fiki-storaro-2027.webp')" data-name="Фики Стораро — Концерт 2027" data-date="2027 · дата: очаквайте" data-href="https://www.kupibileti.bg/bg/about-event/2219" data-ext>
         <picture>
           <source srcset="assets/events/fiki-storaro-2027.webp" type="image/webp">
           <img src="assets/events/fiki-storaro-2027.jpg" alt="Афиш: Фики Стораро — Концерт 2027" width="800" height="800" draggable="false">
         </picture>
       </div>
-      <div class="cg-slide" data-name="Софи Маринова — 30 години на сцена" data-date="НД · 05.12.2027" data-href="https://www.kupibileti.bg/bg/about-event/1499" data-ext hidden>
+      <div class="cg-slide" style="--poster:url('assets/events/sofi-marinova-2027.webp')" data-name="Софи Маринова — 30 години на сцена" data-date="НД · 05.12.2027" data-href="https://www.kupibileti.bg/bg/about-event/1499" data-ext>
         <picture>
           <source srcset="assets/events/sofi-marinova-2027.webp" type="image/webp">
           <img src="assets/events/sofi-marinova-2027.jpg" alt="Афиш: Софи Маринова — 30 години на сцена" width="800" height="800" draggable="false">
         </picture>
       </div>
-      <div class="cg-cursor" id="cgCursor" aria-hidden="true">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>
       </div>
+      <div class="cg-dots" id="cgDots" role="tablist" aria-label="Избор на афиш"></div>
     </div>
     <button class="cg-nav cg-nav--prev" id="cgPrev" type="button" aria-label="Предишен афиш">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 6 9 12 15 18"/></svg>
@@ -1318,105 +1316,112 @@ html:not(.js) .cg-cursor,html:not(.js) .cg-nav{display:none}
     heroTitle.classList.add('split');
   }
 
-  /* ---------- Cursor Gallery с афишите (порт на „Cursor Image Gallery") ----------
-     600ms easeInOut, dots; циклична. Лява/дясна половина плъзгат назад/напред
-     (курсорът-стрелка е само за фина мишка). Реалните бутони #cgPrev/#cgNext
-     обслужват клавиатура, тъч и екранни четци. */
+  /* ---------- Банер-галерия (порт на Framer normal-carousel) ----------
+     Лента (.cg-track) от всички афиши, местена с ПРУЖИННА анимация (stiffness 300,
+     damping 30, mass 1) — интегрирана на кадър във vanilla JS (без библиотеки).
+     Целият афиш се вижда (contain) + замъглен фон. Бутоните ‹ › се ДЕАКТИВИРАТ в
+     краищата (без цикъл); прогрес-точки „хапче" (кликаеми). #cgStatus за екр. четци. */
   var cgStage = document.getElementById('ringStage');
   if(cgStage){
     var cgEl = document.getElementById('cursorGallery');
-    var cgSlides = Array.prototype.slice.call(cgEl.querySelectorAll('.cg-slide'));
-    var cgCursor = document.getElementById('cgCursor');
+    var cgTrack = document.getElementById('cgTrack');
+    var cgSlides = Array.prototype.slice.call(cgTrack.querySelectorAll('.cg-slide'));
+    var cgDotsEl = document.getElementById('cgDots');
     var cgStatus = document.getElementById('cgStatus');
-    var CG_N = cgSlides.length, CG_DUR = 600;
-    var cgIdx = 0, cgSliding = false, cgW = 320, cgStep = 230, cgFirst = true;
+    var cgPrevBtn = document.getElementById('cgPrev');
+    var cgNextBtn = document.getElementById('cgNext');
+    var CG_N = cgSlides.length;
+    var cgIdx = 0, cgW = 1, cgFirst = true;
+    // Пружина (Framer spring)
+    var SPR_K = 300, SPR_C = 30, SPR_M = 1;
+    var cgX = 0, cgV = 0, cgTargetX = 0, cgRaf = null, cgLastT = 0;
 
-    // Подрежда лентата: активният голям в центъра (z отгоре), съседите
-    // отстрани — смалени, полупрозрачни; по-далечните са невидими
-    function cgApply(instant){
-      cgSlides.forEach(function(s, i){
-        var rel = i - cgIdx;
-        if(rel > CG_N / 2) rel -= CG_N;      // безкраен цикъл: най-късият път
-        if(rel < -CG_N / 2) rel += CG_N;
-        s.hidden = false;
-        if(instant) s.style.transition = 'none';
-        s.style.width = cgW + 'px';
-        s.style.height = cgW + 'px';
-        s.style.transform = 'translate(-50%,-50%) translateX(' + (rel * cgStep) + 'px) scale(' + (rel === 0 ? 1 : 0.8) + ')';
-        s.style.opacity = rel === 0 ? '1' : (Math.abs(rel) === 1 ? '.55' : '0');
-        s.style.zIndex = rel === 0 ? '2' : '1';
-        s.style.pointerEvents = 'none';   // кликовете ги хваща лентата
-        if(instant){ void s.offsetWidth; s.style.transition = ''; }
-      });
+    function cgApplyX(){ cgTrack.style.transform = 'translateX(' + cgX + 'px)'; }
+
+    function cgSpringStep(now){
+      if(!cgLastT) cgLastT = now;
+      var dt = (now - cgLastT) / 1000;
+      cgLastT = now;
+      if(dt > 1/30) dt = 1/30;                        // капва дългите кадри (стабилност)
+      var a = (-SPR_K * (cgX - cgTargetX) - SPR_C * cgV) / SPR_M;
+      cgV += a * dt;                                  // полу-имплицитен Ойлер (v, после x)
+      cgX += cgV * dt;
+      cgApplyX();
+      if(Math.abs(cgX - cgTargetX) < 0.4 && Math.abs(cgV) < 0.4){
+        cgX = cgTargetX; cgV = 0; cgApplyX();
+        cgRaf = null; cgLastT = 0; return;
+      }
+      cgRaf = requestAnimationFrame(cgSpringStep);
+    }
+    function cgAnimateTo(target){
+      cgTargetX = target;
+      if(reduced){                                    // reduced-motion: директно, без пружина
+        if(cgRaf){ cancelAnimationFrame(cgRaf); cgRaf = null; }
+        cgX = target; cgV = 0; cgLastT = 0; cgApplyX(); return;
+      }
+      cgLastT = 0;
+      if(cgRaf == null) cgRaf = requestAnimationFrame(cgSpringStep);
     }
 
+    // Височина и ширина идват от CSS (height:100%, width:100%). Тук само пресмятаме
+    // ширината за spring-таргета и снапваме позицията при resize (без анимация).
     function cgLayout(){
-      // Капираме и по височината на сцената — мобилната (330px) да събира афиша
-      cgW = Math.max(220, Math.min(520, cgStage.clientWidth * 0.42, cgStage.clientHeight - 24));
-      cgStep = Math.round(cgW * 0.72);
-      cgEl.style.height = cgW + 'px';
-      cgApply(true);
+      cgW = cgEl.offsetWidth || 1;
+      if(cgRaf){ cancelAnimationFrame(cgRaf); cgRaf = null; cgLastT = 0; }
+      cgTargetX = -cgIdx * cgW; cgX = cgTargetX; cgV = 0;
+      cgApplyX();
     }
 
-    // В коя половина сме — но САМО върху видимата лента с афиши;
-    // в празните флангове няма стрелка и кликът не прави нищо
-    function cgSide(relX){
-      if(CG_N < 2) return 'none';
-      var center = cgEl.clientWidth / 2;
-      var stripHalf = cgStep + cgW * 0.4;   // до външния ръб на страничния афиш
-      if(Math.abs(relX - center) > stripHalf) return 'none';
-      return relX < center ? 'left' : 'right';
+    function cgBuildDots(){
+      if(!cgDotsEl) return;
+      cgDotsEl.innerHTML = '';
+      for(var i = 0; i < CG_N; i++){
+        (function(k){
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.setAttribute('role', 'tab');
+          b.setAttribute('aria-label', 'Афиш ' + (k + 1) + ' от ' + CG_N);
+          if(k === cgIdx){ b.className = 'on'; b.setAttribute('aria-selected', 'true'); }
+          b.addEventListener('click', function(){ cgSetIndex(k); });
+          cgDotsEl.appendChild(b);
+        })(i);
+      }
     }
-
+    function cgSyncDots(){
+      if(!cgDotsEl) return;
+      var kids = cgDotsEl.children;
+      for(var i = 0; i < kids.length; i++){
+        var on = (i === cgIdx);
+        kids[i].className = on ? 'on' : '';
+        kids[i].setAttribute('aria-selected', on ? 'true' : 'false');
+      }
+    }
+    function cgSyncNav(){                              // без цикъл — деактивирани в краищата
+      if(cgPrevBtn) cgPrevBtn.disabled = cgIdx <= 0;
+      if(cgNextBtn) cgNextBtn.disabled = cgIdx >= CG_N - 1;
+    }
     function cgPaint(){
-      if(cgFirst){ cgFirst = false; return; }   // без обявяване при зареждане
+      if(cgFirst){ cgFirst = false; return; }
       var img = cgSlides[cgIdx].querySelector('img');
       if(cgStatus && img) cgStatus.textContent = 'Афиш ' + (cgIdx + 1) + ' от ' + CG_N + ': ' + img.alt;
     }
 
-    function cgGo(dir){
-      if(cgSliding) return;
-      cgSliding = true;
-      cgIdx = ((cgIdx + dir) % CG_N + CG_N) % CG_N;
-      cgApply();                        // подредбата се плъзга с transition
-      setTimeout(function(){
-        cgSliding = false;
-        cgPaint(); cgHover();
-      }, reduced ? 0 : CG_DUR + 40);    // reduced-motion: без изкуствено забавяне
+    function cgSetIndex(i){
+      i = Math.max(0, Math.min(CG_N - 1, i));          // ограничен в краищата (без цикъл)
+      if(i === cgIdx) return;
+      cgIdx = i;
+      cgAnimateTo(-cgIdx * cgW);
+      cgSyncDots(); cgSyncNav(); cgPaint();
     }
 
-    // Курсорът-стрелка следва мишката
-    var cgLast = null;
-    function cgHover(){
-      var side = cgLast ? cgSide(cgLast.x) : 'none';
-      cgEl.classList.toggle('has-side', side !== 'none');
-      cgCursor.classList.toggle('on', side !== 'none');
-      cgCursor.classList.toggle('flip', side === 'left');
-      if(cgLast){
-        cgCursor.style.left = cgLast.x + 'px';
-        cgCursor.style.top = cgLast.y + 'px';
-      }
-    }
-    cgEl.addEventListener('pointermove', function(e){
-      if(e.pointerType !== 'mouse'){ cgLast = null; cgHover(); return; }
-      var r = cgEl.getBoundingClientRect();
-      cgLast = {x: e.clientX - r.left, y: e.clientY - r.top};
-      cgHover();
-    });
-    cgEl.addEventListener('pointerleave', function(){ cgLast = null; cgHover(); });
-
-    cgEl.addEventListener('click', function(e){
-      var r = cgEl.getBoundingClientRect();
-      var side = cgSide(e.clientX - r.left);
-      if(side === 'left') cgGo(-1);
-      else if(side === 'right') cgGo(1);
-    });
-
-    // Реалните бутони — фокусируеми, работят с клавиатура/тъч/екранни четци
-    document.getElementById('cgPrev').addEventListener('click', function(){ cgGo(-1); });
-    document.getElementById('cgNext').addEventListener('click', function(){ cgGo(1); });
+    if(cgPrevBtn) cgPrevBtn.addEventListener('click', function(){ cgSetIndex(cgIdx - 1); });
+    if(cgNextBtn) cgNextBtn.addEventListener('click', function(){ cgSetIndex(cgIdx + 1); });
 
     window.addEventListener('resize', cgLayout);
+    window.addEventListener('load', cgLayout);
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(cgLayout);
+    cgBuildDots();
+    cgSyncNav();
     cgLayout();
     cgPaint();
   }
