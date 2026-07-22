@@ -239,6 +239,10 @@ time{font-variant-numeric:tabular-nums}
 }
 .mobile-menu a:hover{color:var(--brand)}
 .mobile-menu a[aria-current="page"]{color:var(--brand-dk)}
+/* Фикс: махаме черната рамка (default outline) при ТАП върху линк в мобилното меню; задържаме видим фокус само за клавиатура (focus-visible) */
+.mobile-menu a{-webkit-tap-highlight-color:transparent}
+.mobile-menu a:focus{outline:none}
+.mobile-menu a:focus-visible{outline:2px solid var(--brand);outline-offset:-3px;border-radius:3px}
 .mobile-menu .btn{margin-top:28px;width:100%;color:#fff}
 .menu-close{
   position:absolute;top:16px;right:16px;width:48px;height:48px;
@@ -336,7 +340,7 @@ time{font-variant-numeric:tabular-nums}
 .ar-open:focus-visible{outline:2px solid var(--brand);outline-offset:-2px}
 @media(max-width:1024px){.ar-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:820px){.ar-grid{grid-template-columns:repeat(2,1fr);gap:18px;padding-bottom:64px}}
-@media(max-width:480px){.ar-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.ar-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}}
 /* CTA лента — „Организираш събитие?" */
 .cta-band{background:var(--white);padding:64px 0;border-top:1px solid var(--hair)}
 .cta-inner{

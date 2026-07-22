@@ -315,6 +315,10 @@ time,.price,.ev-date{font-variant-numeric:tabular-nums}
 .mobile-menu a:hover{color:var(--brand)}
 /* Видим маркер за активната страница в мобилното меню */
 .mobile-menu a[aria-current="page"]{color:var(--brand-dk)}
+/* Фикс: махаме черната рамка (default outline) при ТАП върху линк в мобилното меню; задържаме видим фокус само за клавиатура (focus-visible) */
+.mobile-menu a{-webkit-tap-highlight-color:transparent}
+.mobile-menu a:focus{outline:none}
+.mobile-menu a:focus-visible{outline:2px solid var(--brand);outline-offset:-3px;border-radius:3px}
 .mobile-menu .btn{margin-top:28px;width:100%;color:#fff}
 .menu-close{
   position:absolute;top:16px;right:16px;width:48px;height:48px;
@@ -926,13 +930,13 @@ html:not(.js) .hero-donkey{display:none}
          aria-label="Афиши на предстоящи събития — движат се непрекъснато; спрете с мишката за пауза">
       <div class="hero-strip-track">
         <div class="hero-strip-group">
-          <a class="hero-poster" href="tour-toni-dimitrova.html" aria-label="Тони Димитрова — Турне 2026">
+          <a class="hero-poster" href="https://www.kupibileti.bg/bg/about-event/1461" target="_blank" rel="noopener" aria-label="Тони Димитрова — Турне 2026: купи билети (отваря се в нов прозорец)">
             <picture><source srcset="assets/events/toni-dimitrova-2026.webp" type="image/webp"><img src="assets/events/toni-dimitrova-2026.jpg" alt="Афиш: Тони Димитрова — Турне 2026" width="800" height="800" fetchpriority="high" draggable="false"></picture>
           </a>
           <a class="hero-poster" href="https://www.kupibileti.bg/bg/about-event/2451" target="_blank" rel="noopener" aria-label="Ку-Ку Бенд и Ивана: „Шампанско и сълзи“ (отваря се в нов прозорец)">
             <picture><source srcset="assets/events/ku-ku-ivana-2026.webp" type="image/webp"><img src="assets/events/ku-ku-ivana-2026.jpg" alt="Афиш: Ку-Ку Бенд и Ивана: „Шампанско и сълзи“" width="800" height="800" draggable="false"></picture>
           </a>
-          <a class="hero-poster" href="event-toni-storaro.html" aria-label="Тони Стораро — Юбилеен концерт">
+          <a class="hero-poster" href="https://www.kupibileti.bg/bg/about-event/1283" target="_blank" rel="noopener" aria-label="Тони Стораро — Юбилеен концерт: купи билети (отваря се в нов прозорец)">
             <picture><source srcset="assets/events/toni-storaro.webp" type="image/webp"><img src="assets/events/toni-storaro.jpg" alt="Афиш: Тони Стораро — Юбилеен концерт" width="800" height="800" draggable="false"></picture>
           </a>
           <a class="hero-poster" href="https://www.kupibileti.bg/bg/about-event/2219" target="_blank" rel="noopener" aria-label="Фики Стораро — Концерт 2027 (отваря се в нов прозорец)">
@@ -943,9 +947,9 @@ html:not(.js) .hero-donkey{display:none}
           </a>
         </div>
         <div class="hero-strip-group" aria-hidden="true">
-          <a class="hero-poster" href="tour-toni-dimitrova.html" tabindex="-1"><picture><source srcset="assets/events/toni-dimitrova-2026.webp" type="image/webp"><img src="assets/events/toni-dimitrova-2026.jpg" alt="" width="800" height="800" draggable="false"></picture></a>
+          <a class="hero-poster" href="https://www.kupibileti.bg/bg/about-event/1461" target="_blank" rel="noopener" tabindex="-1"><picture><source srcset="assets/events/toni-dimitrova-2026.webp" type="image/webp"><img src="assets/events/toni-dimitrova-2026.jpg" alt="" width="800" height="800" draggable="false"></picture></a>
           <a class="hero-poster" href="https://www.kupibileti.bg/bg/about-event/2451" target="_blank" rel="noopener" tabindex="-1"><picture><source srcset="assets/events/ku-ku-ivana-2026.webp" type="image/webp"><img src="assets/events/ku-ku-ivana-2026.jpg" alt="" width="800" height="800" draggable="false"></picture></a>
-          <a class="hero-poster" href="event-toni-storaro.html" tabindex="-1"><picture><source srcset="assets/events/toni-storaro.webp" type="image/webp"><img src="assets/events/toni-storaro.jpg" alt="" width="800" height="800" draggable="false"></picture></a>
+          <a class="hero-poster" href="https://www.kupibileti.bg/bg/about-event/1283" target="_blank" rel="noopener" tabindex="-1"><picture><source srcset="assets/events/toni-storaro.webp" type="image/webp"><img src="assets/events/toni-storaro.jpg" alt="" width="800" height="800" draggable="false"></picture></a>
           <a class="hero-poster" href="https://www.kupibileti.bg/bg/about-event/2219" target="_blank" rel="noopener" tabindex="-1"><picture><source srcset="assets/events/fiki-storaro-2027.webp" type="image/webp"><img src="assets/events/fiki-storaro-2027.jpg" alt="" width="800" height="800" draggable="false"></picture></a>
           <a class="hero-poster" href="https://www.kupibileti.bg/bg/about-event/1499" target="_blank" rel="noopener" tabindex="-1"><picture><source srcset="assets/events/sofi-marinova-2027.webp" type="image/webp"><img src="assets/events/sofi-marinova-2027.jpg" alt="" width="800" height="800" draggable="false"></picture></a>
         </div>

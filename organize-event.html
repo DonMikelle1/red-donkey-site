@@ -238,6 +238,10 @@ time,.step-num{font-variant-numeric:tabular-nums}
 }
 .mobile-menu a:hover{color:var(--brand)}
 .mobile-menu a[aria-current="page"]{color:var(--brand-dk)}
+/* Фикс: махаме черната рамка (default outline) при ТАП върху линк в мобилното меню; задържаме видим фокус само за клавиатура (focus-visible) */
+.mobile-menu a{-webkit-tap-highlight-color:transparent}
+.mobile-menu a:focus{outline:none}
+.mobile-menu a:focus-visible{outline:2px solid var(--brand);outline-offset:-3px;border-radius:3px}
 .mobile-menu .btn{margin-top:28px;width:100%;color:#fff}
 .menu-close{
   position:absolute;top:16px;right:16px;width:48px;height:48px;
