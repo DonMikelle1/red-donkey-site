@@ -1,0 +1,39 @@
+# Red Donkey
+
+> Red Donkey (Red Donkey Backstage Management) е български организатор на концерти и живи събития от 2022 г. Организира концерти, турнета и частни събития, продава билети и работи с водещи български и гръцки изпълнители. Мото: „Правим концертите незабравими." Сайт на български език.
+
+Red Donkey организира и промотира концерти в България — на арени като Арена 8888 (София), НДК и летни театри. Билетите се продават чрез партньора kupibileti.bg. Компанията предлага и организация на частни събития (сватби, корпоративни партита, фирмени концерти).
+
+## Основни страници
+- [Начало](https://red-donkey-site.vercel.app/): Общ преглед на Red Donkey, предстоящи събития и билети.
+- [Всички събития](https://red-donkey-site.vercel.app/events.html): Пълен календар с предстоящи концерти и турнета.
+- [Артисти](https://red-donkey-site.vercel.app/artisti.html): Изпълнителите в програмата на Red Donkey.
+- [Организирай събитие](https://red-donkey-site.vercel.app/organize-event.html): Организация на частни и корпоративни събития.
+- [Локации](https://red-donkey-site.vercel.app/lokacii.html): Зали и площадки, на които се провеждат събитията.
+- [За нас](https://red-donkey-site.vercel.app/za-nas.html): Кои сме, какво правим и защо.
+- [Контакти](https://red-donkey-site.vercel.app/kontakti.html): Имейл, телефон и адрес.
+
+## Предстоящи събития
+- [Тони Стораро — Юбилеен концерт](https://red-donkey-site.vercel.app/event-toni-storaro.html): Петък, 13 ноември 2026, Арена 8888, София. Билети от 40 евро.
+- [Тони Димитрова — Турне 2026](https://red-donkey-site.vercel.app/tour-toni-dimitrova.html): Пет града — Пловдив, Бургас, Варна, Русе и финал в НДК, София (август 2026 – януари 2027). Билети от 25 евро.
+
+## Артисти
+- [Тони Димитрова](https://red-donkey-site.vercel.app/artist-toni-dimitrova.html)
+- [Тони Стораро](https://red-donkey-site.vercel.app/artist-toni-storaro.html)
+- [Софи Маринова](https://red-donkey-site.vercel.app/artist-sofi-marinova.html)
+- [Фики Стораро](https://red-donkey-site.vercel.app/artist-fiki-storaro.html)
+- [Ивана](https://red-donkey-site.vercel.app/artist-ivana.html)
+- [George Mazonakis](https://red-donkey-site.vercel.app/artist-george-mazonakis.html)
+- [Konstantinos Argiros](https://red-donkey-site.vercel.app/artist-konstantinos-argiros.html)
+- [Милица Божинова](https://red-donkey-site.vercel.app/artist-milica-bozhinova.html)
+- [Драгомир Димитров](https://red-donkey-site.vercel.app/artist-dragomir-dimitrov.html)
+- [Емил Василев](https://red-donkey-site.vercel.app/artist-emil-vasilev.html)
+- [Ралица Ангелова](https://red-donkey-site.vercel.app/artist-ralica-angelova.html)
+
+## Контакти
+- Имейл: office@reddonkey.bg
+- Телефон: +359 88 6525262
+- Адрес: гр. София, пл. България №1, НДК, вх. А3
+- Билетен партньор: kupibileti.bg
+- Facebook: https://www.facebook.com/reddonkeybackstage
+- Instagram: https://www.instagram.com/reddonkey.bg
